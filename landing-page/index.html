@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SmartDrive Assist — Mobility, Reimagined</title>
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --white:#ffffff;--off-white:#f5f6f8;--border:#dde0e8;
+  --text-muted:#6b7280;--text-dark:#0f1117;
+  --accent:#0057FF;--accent-light:#e6eeff;--accent-mid:#3a7bff;
+  --green:#00b97d;--green-light:#e0f8f0;--nav-h:68px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+/* LOGO */
+.nav-logo-wrap{display:flex;align-items:center;gap:.65rem;cursor:pointer;text-decoration:none;background:none;border:none;padding:0;}
+.nav-logo-icon{width:34px;height:34px;flex-shrink:0;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--text-dark);}
+.nav-logo-text span{color:var(--accent);}
+
+/* PAGE SYSTEM — only active page visible */
+.pg{display:none;min-height:100vh;padding-top:var(--nav-h);}
+.pg.active{display:block;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none;}
+.nav-links>li{position:relative;}
+.nav-links>li>a,.nav-links>li>button{font-size:.87rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
+.nav-links>li>a:hover,.nav-links>li>button:hover{color:var(--text-dark);}
+.nav-links>li>a.active-link{color:var(--text-dark);}
+
+/* dropdown — JS controlled, not hover */
+.has-drop>button::after{content:'';display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;margin-left:3px;transition:transform .2s;opacity:.55;}
+.has-drop.open>button::after{transform:rotate(180deg);}
+.dropdown{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--white);border:1px solid var(--border);border-radius:14px;padding:.5rem;min-width:240px;box-shadow:0 16px 48px rgba(0,0,0,.1);list-style:none;z-index:300;}
+.has-drop.open .dropdown{display:block;}
+.dropdown li button,.dropdown li a{display:flex;align-items:flex-start;gap:10px;padding:.65rem .85rem;border-radius:8px;color:var(--text-dark);font-size:.84rem;font-weight:400;transition:background .15s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;text-decoration:none;}
+.dropdown li button:hover,.dropdown li a:hover{background:var(--off-white);}
+.drop-icon{width:18px;height:18px;flex-shrink:0;margin-top:1px;color:var(--text-muted);}
+.drop-text strong{display:block;font-weight:600;font-size:.84rem;margin-bottom:2px;color:var(--text-dark);}
+.drop-text span{font-size:.77rem;color:var(--text-muted);}
+.drop-divider{height:1px;background:var(--border);margin:.4rem .85rem;}
+.nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:.44rem 1.1rem!important;border-radius:8px!important;font-weight:500!important;transition:background .2s,transform .15s!important;}
+.nav-cta:hover{background:#003ee0!important;transform:translateY(-1px);}
+
+/* SHARED */
+.section{padding:80px 5%;}
+.section-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.65rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:.9rem;}
+.section-sub{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.75;max-width:520px;}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.btn-primary{background:var(--accent);color:white;padding:.72rem 1.7rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-block;}
+.btn-primary:hover{background:#003ee0;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--accent);padding:.72rem 1.7rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;text-decoration:none;border:1.5px solid var(--accent);cursor:pointer;transition:background .2s,transform .15s;display:inline-block;}
+.btn-outline:hover{background:var(--accent-light);transform:translateY(-2px);}
+
+/* PAGE NAV BANNER — always dark by default */
+.page-nav-banner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:3rem 5%;background:var(--text-dark);cursor:pointer;
+  border:none;width:100%;font-family:'DM Sans',sans-serif;
+  transition:background .25s;position:relative;overflow:hidden;
+  text-align:left;
+}
+.page-nav-banner::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 60%,rgba(0,87,255,.1) 100%);
+  pointer-events:none;
+}
+.page-nav-banner:hover{background:#181b28;}
+/* light-prev: banner follows a white/light section — muted grey */
+.page-nav-banner.light-prev{background:#dddfe5;border-top:1px solid #c8cad2;padding-top:3.75rem;padding-bottom:3.75rem;}
+.page-nav-banner.light-prev::before{display:none;}
+.page-nav-banner.light-prev:hover{background:#d2d4da;}
+.page-nav-banner.light-prev .pnb-eyebrow{color:#888c99;}
+.page-nav-banner.light-prev .pnb-title{color:#0f1117;}
+.page-nav-banner.light-prev .pnb-title span{color:var(--accent);}
+.page-nav-banner.light-prev .pnb-sub{color:#6b7280;}
+.page-nav-banner.light-prev .pnb-dot{background:#b0b5c0;}
+.page-nav-banner.light-prev .pnb-dot.on{background:var(--accent);}
+.page-nav-banner.light-prev .pnb-arrow{background:#c8cad2;border-color:#b0b3bc;}
+.page-nav-banner.light-prev .pnb-arrow svg{stroke:#6b7280;}
+.page-nav-banner.light-prev:hover .pnb-arrow{background:var(--accent);border-color:var(--accent);transform:translateX(6px);}
+.page-nav-banner.light-prev:hover .pnb-arrow svg{stroke:white;}
+.pnb-left{text-align:left;}
+.pnb-eyebrow{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:rgba(255,255,255,.32);margin-bottom:.4rem;}
+.pnb-title{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:800;color:white;letter-spacing:-.025em;line-height:1.1;}
+.pnb-title span{color:var(--accent-mid);}
+.pnb-sub{font-size:.82rem;color:rgba(255,255,255,.35);margin-top:.45rem;font-weight:300;}
+.pnb-right{display:flex;align-items:center;gap:1.25rem;flex-shrink:0;}
+.pnb-dots{display:flex;flex-direction:column;gap:6px;}
+.pnb-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.14);}
+.pnb-dot.on{background:var(--accent-mid);}
+.pnb-arrow{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s,border-color .25s;flex-shrink:0;}
+.page-nav-banner:not(.light-prev):hover .pnb-arrow{transform:translateX(6px);background:rgba(0,87,255,.3);border-color:var(--accent-mid);}
+.pnb-arrow svg{width:20px;height:20px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── PAGE: HOME ── */
+#pg-home{}
+#hero{padding:calc(var(--nav-h) + 50px) 5% 70px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;overflow:hidden;min-height:100vh;}
+#hero::before{content:'';position:absolute;top:-80px;right:-120px;width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,var(--accent-light) 0%,transparent 68%);z-index:0;}
+#hero::after{content:'';position:absolute;bottom:-60px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#e0f8f0 0%,transparent 70%);z-index:0;}
+.hero-content{position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);font-size:.74rem;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:1.4rem;letter-spacing:.04em;text-transform:uppercase;}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:1.2rem;}
+h1 .hl{color:var(--accent);}
+.hero-sub{font-size:1.07rem;color:var(--text-muted);font-weight:300;line-height:1.72;max-width:440px;margin-bottom:2rem;}
+.btn-group{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
+.hero-link{color:var(--text-dark);font-size:.95rem;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:gap .2s;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;}
+.hero-link:hover{gap:.65rem;}
+.hero-trust{display:flex;align-items:center;gap:.6rem;margin-top:1.8rem;font-size:.78rem;color:var(--text-muted);flex-wrap:wrap;}
+.trust-dot{width:3px;height:3px;border-radius:50%;background:var(--border);flex-shrink:0;}
+.hero-visual{position:relative;z-index:1;display:flex;justify-content:center;}
+.hero-card{background:var(--white);border:1px solid var(--border);border-radius:22px;padding:2rem;width:100%;max-width:400px;box-shadow:0 24px 64px rgba(0,87,255,.07),0 4px 20px rgba(0,0,0,.04);}
+.hero-icon-wrap{width:52px;height:52px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;}
+.hero-icon-wrap svg{width:26px;height:26px;fill:white;}
+.hc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:3px;}
+.hc-sub{font-size:.79rem;color:var(--text-muted);margin-bottom:1.35rem;}
+.hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.35rem;}
+.stat-chip{background:var(--off-white);border-radius:11px;padding:.85rem 1rem;}
+.stat-chip .val{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--accent);line-height:1;}
+.stat-chip .lbl{font-size:.71rem;color:var(--text-muted);margin-top:3px;}
+.hero-status{display:flex;align-items:center;gap:8px;font-size:.79rem;color:var(--green);font-weight:600;}
+.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+
+#stats-bar{background:var(--text-dark);padding:2.5rem 5%;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stats-item .num{font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;color:white;line-height:1;}
+.stats-item .num span{color:var(--accent-mid);}
+.stats-item .desc{font-size:.79rem;color:rgba(255,255,255,.4);margin-top:5px;font-weight:300;}
+
+/* home testimonials preview */
+.testi-preview{background:var(--off-white);padding:80px 5%;}
+.testi-preview-header{text-align:center;max-width:500px;margin:0 auto 3rem;}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;max-width:960px;margin:0 auto;}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2rem;}
+.testi-quote{font-size:.95rem;line-height:1.78;color:var(--text-dark);font-style:italic;font-weight:300;margin-bottom:1.5rem;padding-left:1rem;position:relative;}
+.testi-quote::before{content:'"';position:absolute;left:-6px;top:-10px;font-size:3.2rem;color:var(--accent-light);font-family:'Syne',sans-serif;font-weight:800;line-height:1;}
+.testi-author{display:flex;align-items:center;gap:.85rem;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:white;flex-shrink:0;}
+.testi-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;}
+.testi-role{font-size:.77rem;color:var(--text-muted);}
+
+/* ── PAGE: FEATURES ── */
+#pg-features{}
+/* BACK BUTTON */
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--text-muted);padding:1.25rem 5% .5rem;transition:color .2s;}
+.back-btn:hover{color:var(--text-dark);}
+.back-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;}
+.back-btn:hover svg{transform:translateX(-3px);}
+.features-hero{padding:60px 5% 0;text-align:center;max-width:600px;margin:0 auto;}
+.feat-grid-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto 1.25rem;padding:0 5%;}
+.feat-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.feat-card:hover{border-color:var(--accent);box-shadow:0 8px 30px rgba(0,87,255,.08);transform:translateY(-3px);}
+.feat-card.feat-highlight{background:var(--white);border-color:var(--border);}
+.feat-tag-pill{display:inline-block;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:999px;margin-bottom:.75rem;}
+.t-safety{background:#e0f8f0;color:#00835a;}
+.t-emergency{background:#fff0ee;color:#c0392b;}
+.t-sensors{background:#f0edff;color:#5b3fd8;}
+.t-power{background:#fff8e0;color:#9a6f00;}
+.t-control{background:#edf7ff;color:#1a6fa8;}
+.t-flex{background:#f0fdf4;color:#276749;}
+.t-ux{background:#f5f0ff;color:#6b3fa0;}
+.t-access{background:#e6eeff;color:#0057FF;}
+.feat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.4rem;color:var(--text-dark);}
+.feat-desc{font-size:.83rem;color:var(--text-muted);line-height:1.65;}
+.more-features-wrap{max-width:1100px;margin:0 auto;padding:0 5% 80px;}
+.home-feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+@media(max-width:700px){.home-feat-grid{grid-template-columns:1fr;}}
+.more-toggle{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;background:none;border:1.5px solid var(--border);border-radius:10px;padding:.65rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text-muted);cursor:pointer;transition:border-color .2s,color .2s;}
+.more-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.more-toggle .arr{transition:transform .3s;font-size:.72rem;}
+.more-toggle.open .arr{transform:rotate(180deg);}
+.more-drawer{display:none;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:1.25rem;}
+.more-drawer.open{display:grid;}
+
+/* hiw on features page */
+.hiw-band{background:var(--off-white);padding:80px 5%;}
+.hiw-header{text-align:center;max-width:560px;margin:0 auto 3.5rem;}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;}
+.hiw-step{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2rem;transition:box-shadow .25s,transform .25s;}
+.hiw-step:hover{box-shadow:0 12px 40px rgba(0,87,255,.09);transform:translateY(-4px);}
+.step-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--accent-light);line-height:1;margin-bottom:.65rem;}
+.step-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.45rem;}
+.step-desc{font-size:.86rem;color:var(--text-muted);line-height:1.65;}
+
+/* specs on features page */
+.specs-band{background:var(--text-dark);color:white;padding:80px 5%;}
+.specs-band .section-tag{color:var(--accent-mid);}
+.specs-band .section-title{color:white;}
+.specs-band .section-sub{color:rgba(255,255,255,.45);}
+.specs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.spec-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.75rem;}
+.spec-card-title{font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.33);margin-bottom:1rem;}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:.52rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.84rem;}
+.spec-row:last-child{border-bottom:none;}
+.spec-key{color:rgba(255,255,255,.42);}
+.spec-val{color:white;font-weight:500;}
+.spec-val.ac{color:var(--accent-mid);}
+
+
+/* ── PAGE: MODELS ── */
+#pg-models{}
+.models-wrap{padding:60px 5% 80px;max-width:1120px;margin:0 auto;}
+.models-hero{text-align:center;max-width:670px;margin:0 auto 2.4rem;}
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.model-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.6rem;display:flex;flex-direction:column;gap:.8rem;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.model-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,87,255,.08);}
+.model-price{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--accent);line-height:1.1;}
+.model-features{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.model-features li{font-size:.85rem;color:var(--text-muted);line-height:1.55;padding-left:1.05rem;position:relative;}
+.model-features li::before{content:'•';position:absolute;left:0;top:0;color:var(--accent);font-weight:700;}
+
+/* ── PAGE: ABOUT ── */
+#pg-about{}
+.about-hero{padding:60px 5% 80px;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1200px;margin:0 auto;}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.about-card{background:var(--off-white);border:1px solid var(--border);border-radius:14px;padding:1.4rem;}
+.about-card.wide{grid-column:1/-1;}
+.about-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.91rem;margin-bottom:.3rem;}
+.about-card p{font-size:.81rem;color:var(--text-muted);line-height:1.6;}
+.about-label{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-bottom:.65rem;}
+.lbl-hardware{background:#f0edff;color:#5b3fd8;}
+.lbl-design{background:#e6eeff;color:#0057FF;}
+.lbl-impact{background:#e0f8f0;color:#00835a;}
+.lbl-team{background:#fff8e0;color:#9a6f00;}
+.lbl-status{background:var(--off-white);color:var(--text-muted);}
+
+/* mission strip */
+.mission-strip{background:var(--text-dark);padding:70px 5%;text-align:center;}
+.mission-strip blockquote{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,2.8vw,2rem);font-weight:700;color:white;max-width:760px;margin:0 auto;line-height:1.4;letter-spacing:-.01em;}
+.mission-strip blockquote span{color:var(--accent-mid);}
+
+/* faq on about page */
+.faq-band{background:var(--off-white);padding:80px 5%;}
+.faq-layout{display:grid;grid-template-columns:1fr 1.65fr;gap:5rem;align-items:start;max-width:1000px;margin:0 auto;}
+.faq-list{display:flex;flex-direction:column;gap:.75rem;}
+.faq-item{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white);}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:1.1rem 1.25rem;font-family:'DM Sans',sans-serif;font-size:.91rem;font-weight:500;color:var(--text-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .15s;}
+.faq-q:hover{background:var(--off-white);}
+.faq-q .faq-icon{font-size:.85rem;transition:transform .3s;flex-shrink:0;color:var(--text-muted);font-weight:400;}
+.faq-q.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;font-size:.86rem;color:var(--text-muted);line-height:1.72;}
+.faq-a.open{max-height:300px;padding:.1rem 1.25rem 1.1rem;}
+
+/* ── PAGE: CONTACT ── */
+#pg-contact{}
+.contact-wrap{padding:60px 5% 80px;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1100px;margin:0 auto;}
+.contact-left h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.9rem;}
+.contact-left p{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.75;margin-bottom:1.5rem;}
+.contact-detail{display:flex;flex-direction:column;gap:.75rem;margin-top:2rem;}
+.contact-detail-item{font-size:.87rem;color:var(--text-muted);}
+.contact-detail-item strong{display:block;font-weight:600;color:var(--text-dark);font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;}
+.contact-form{display:flex;flex-direction:column;gap:1rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-field{display:flex;flex-direction:column;gap:4px;}
+.form-field label{font-size:.79rem;font-weight:600;color:var(--text-dark);}
+.form-field input,.form-field textarea,.form-field select{border:1px solid var(--border);border-radius:10px;padding:.68rem .9rem;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--text-dark);background:var(--off-white);outline:none;transition:border-color .2s;resize:none;}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--accent);background:white;}
+.submit-btn{background:var(--accent);color:white;border:none;border-radius:10px;padding:.85rem;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:background .2s,transform .15s;}
+.submit-btn:hover{background:#003ee0;transform:translateY(-2px);}
+.submit-btn:disabled{background:#c8d6ff;color:#6b7ab0;cursor:not-allowed;transform:none;}
+.submit-btn:disabled:hover{background:#c8d6ff;transform:none;}
+.captcha-wrap{display:flex;flex-direction:column;gap:.4rem;}
+.captcha-note{font-size:.76rem;color:var(--text-muted);}
+
+/* FOOTER */
+footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;}
+.foot-brand .foot-logo{font-family:'Syne',sans-serif;font-weight:800;color:white;font-size:1rem;text-decoration:none;display:block;margin-bottom:.6rem;cursor:pointer;background:none;border:none;}
+.foot-brand .foot-logo span{color:var(--accent-mid);}
+.foot-brand p{font-size:.8rem;line-height:1.65;max-width:220px;}
+.foot-col h5{font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;color:white;margin-bottom:.9rem;text-transform:uppercase;letter-spacing:.05em;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.foot-col ul li{cursor:pointer;}
+.foot-col ul li a,.foot-col ul li button{color:rgba(255,255,255,.38);text-decoration:none;font-size:.82rem;transition:color .2s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
+.foot-col ul li a:hover,.foot-col ul li button:hover{color:white;}
+.foot-bottom{background:#080a10;padding:.9rem 5%;display:flex;justify-content:space-between;align-items:center;font-size:.77rem;color:rgba(255,255,255,.28);}
+
+@media(max-width:900px){
+  #hero,.about-hero,.contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
+  #hero{min-height:auto;}
+  .hiw-steps,.feat-grid-hero,.specs-grid,.testi-grid,.models-grid{grid-template-columns:1fr;}
+  .more-drawer.open{grid-template-columns:1fr 1fr;}
+  #stats-bar{grid-template-columns:1fr 1fr;}
+  .faq-layout{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  footer{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .more-drawer.open,.about-cards{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo-wrap" onclick="showPage('home')">
+    <svg class="nav-logo-icon" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+      <rect width="34" height="34" rx="8" fill="#0057FF"/>
+      <circle cx="13.5" cy="21" r="8.5" fill="none" stroke="white" stroke-width="2"/>
+      <line x1="13.5" y1="12.5" x2="13.5" y2="29.5" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+      <line x1="5" y1="21" x2="22" y2="21" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+      <circle cx="13.5" cy="21" r="2" fill="#0057FF" stroke="white" stroke-width="1.2"/>
+      <polygon points="14.5,13.5 11.5,19.5 14,19.5 11,26 17,20 14,20" fill="white"/>
+      <circle cx="24" cy="24" r="3.5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+      <path d="M23 9.5 A3.5 3.5 0 0 1 28 9.5" fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>
+      <path d="M21 7 A6.5 6.5 0 0 1 30 7" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      <circle cx="25.5" cy="11.5" r="1.4" fill="white" opacity="0.9"/>
+    </svg>
+    <span class="nav-logo-text">SmartDrive <span>Assist.</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nl-home">Home</a></li>
+    <li><a onclick="showPage('features')" id="nl-features">How it works</a></li>
+    <li><a onclick="showPage('models')" id="nl-models">Models</a></li>
+    <li><a onclick="showPage('about')" id="nl-about">About</a></li>
+    <li><a onclick="showPage('faq')" id="nl-faq">FAQ</a></li>
+    <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
+    <li><a class="nav-cta" onclick="showPage('contact')">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════ PAGE: HOME ════════════════ -->
+<div class="pg active" id="pg-home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content fade-up">
+      <div class="hero-badge">Prototype · Active Development</div>
+      <h1>Mobility is a right,<br/><span class="hl">not a privilege.</span></h1>
+      <p class="hero-sub">SmartDrive Assist is a bolt-on intelligent system that upgrades any manual wheelchair into a full-featured smart mobility aid — no replacement needed, at a target price of just Rs. 10,000.</p>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="showPage('features')">Explore how it works</button>
+        <button class="hero-link" onclick="showPage('features')">How it works &rarr;</button>
+      </div>
+      <div class="hero-trust">
+        <span>Feedback from BraveHeart Soldier Foundation</span>
+        <span class="trust-dot"></span>
+        <span>AssisTech Foundation</span>
+        <span class="trust-dot"></span>
+        <span>Student innovation project</span>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="hero-card">
+        <!-- Full logo displayed prominently -->
+        <div style="margin-bottom:1.25rem;">
+          <img src="../images/logo.png" alt="SmartDrive Assist logo" style="width:100%;max-width:320px;display:block;margin:0 auto;border-radius:14px;"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div id="stats-bar">
+    <div class="stats-item"><div class="num">75<span>M+</span></div><div class="desc">wheelchair users globally</div></div>
+    <div class="stats-item"><div class="num">9</div><div class="desc">smart modules, one add-on</div></div>
+    <div class="stats-item"><div class="num">Rs.<span>10K</span></div><div class="desc">target retail price</div></div>
+    <div class="stats-item"><div class="num">0</div><div class="desc">chair replacements needed</div></div>
+  </div>
+
+  <!-- TESTIMONIALS PREVIEW -->
+  <div class="testi-preview" id="testi">
+    <div class="testi-preview-header fade-up">
+      <div class="section-tag">What people say</div>
+      <h2 class="section-title">Expert feedback.</h2>
+      <p class="section-sub" style="margin:0 auto;">Feedback from founders and directors who have reviewed SmartDrive Assist firsthand.</p>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <p class="testi-quote">SmartDrive Assist is an initiative with significant potential for social impact. It can grow from a student innovation into a product that meaningfully improves the quality of life for hundreds of thousands.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent);">AS</div>
+          <div>
+            <div class="testi-name">Anuj Sharma</div>
+            <div class="testi-role">Director, BraveHeart Soldier Foundation</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">PM</div>
+          <div>
+            <div class="testi-name">Prateek Madhav</div>
+            <div class="testi-role">CEO, AssisTech Foundation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME: WHY WE BUILT IT + FEATURES TEASER -->
+  <div style="background:var(--white);padding:70px 5%;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto;align-items:center;" class="fade-up">
+      <div>
+        <div class="section-tag">Why we built it</div>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,2.8vw,2.1rem);">Smart wheelchairs exist. Most people can't afford one.</h2>
+        <p class="section-sub" style="font-size:.93rem;margin-top:.5rem;">A powered electric wheelchair costs Rs. 80,000 to Rs. 3,00,000. SmartDrive Assist targets Rs. 10,000 — a clip-on kit, not a replacement. Same freedom. A fraction of the price.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.9rem;">
+        <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
+          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">Rs. 10K</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">target price</div>
+        </div>
+        <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
+          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">75M+</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">wheelchair users globally</div>
+        </div>
+        <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
+          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">0</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">modifications to your chair</div>
+        </div>
+        <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
+          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">9</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">smart modules built-in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME: FEATURES QUICK LOOK -->
+  <div style="background:var(--off-white);padding:70px 5%;">
+    <div style="max-width:1100px;margin:0 auto;" class="fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <div class="section-tag">What it does</div>
+          <h2 class="section-title" style="font-size:clamp(1.5rem,2.8vw,2.1rem);margin-bottom:0;">Key capabilities at a glance.</h2>
+        </div>
+        <button onclick="showPage('features')" style="font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--accent);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.3rem;flex-shrink:0;">See how it works &rarr;</button>
+      </div>
+      <div class="home-feat-grid">
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
+          <div style="width:36px;height:36px;border-radius:9px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"><path d="M10 3v14M3 10h14"/></svg>
+          </div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Manual / Electric Toggle</div><div style="font-size:.78rem;color:var(--text-muted);">Switch modes instantly, always your choice.</div></div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
+          <div style="width:36px;height:36px;border-radius:9px;background:#fff0ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"><path d="M10 2v8"/><circle cx="10" cy="14" r="2" fill="#c0392b"/></svg>
+          </div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">SOS Alerts</div><div style="font-size:.78rem;color:var(--text-muted);">One tap notifies all emergency contacts.</div></div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
+          <div style="width:36px;height:36px;border-radius:9px;background:#f0edff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#5b3fd8" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="7"/><path d="M7 10h6M10 7v6"/></svg>
+          </div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Obstacle Detection</div><div style="font-size:.78rem;color:var(--text-muted);">IR sensors stop the chair before impact.</div></div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
+          <div style="width:36px;height:36px;border-radius:9px;background:#fff8e0;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9a6f00" stroke-width="1.8" stroke-linecap="round"><path d="M10 3l2.5 5 5.5.8-4 3.9.9 5.3L10 15.5l-4.9 2.5.9-5.3-4-3.9 5.5-.8z"/></svg>
+          </div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Auto-Recharging</div><div style="font-size:.78rem;color:var(--text-muted);">Charges itself while being pushed.</div></div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
+          <div style="width:36px;height:36px;border-radius:9px;background:#f0edff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#5b3fd8" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l4-4M17 3l-4 4M10 10l4-4M6 14l4-4"/></svg>
+          </div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Edge Detection</div><div style="font-size:.78rem;color:var(--text-muted);">Ultrasonic sensors catch drop-offs.</div></div>
+        </div>
+        <div style="background:var(--accent);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:center;justify-content:center;cursor:pointer;gap:.5rem;" onclick="showPage('features')">
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:white;">+ 4 more &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE NAV: Home → How it works -->
+  <button class="page-nav-banner light-prev" onclick="showPage('features')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; How it works screen</div>
+      <div class="pnb-title">Built different.<br/><span>Engineered smarter.</span></div>
+      <div class="pnb-sub">How it works, safety flow, full specs</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot on"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-home -->
+
+
+<!-- ════════════════ PAGE: FEATURES ════════════════ -->
+<div class="pg" id="pg-features">
+  <button class="back-btn" onclick="showPage('home')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Home
+  </button>
+    <!-- HOW IT WORKS -->
+  <div class="hiw-band">
+    <div class="hiw-header fade-up">
+      <div class="section-tag">How it works</div>
+      <h2 class="section-title">One add-on. Total upgrade.</h2>
+      <p class="section-sub">Attaches to any standard manual wheelchair in three modular layers — no tools, no permanent changes.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-title">Clip it on</div>
+        <p class="step-desc">The entire SmartDrive Assist system mounts onto your existing frame — clamp-based, fully reversible, compatible with all standard manual chairs. Zero modifications required.</p>
+      </div>
+      <div class="hiw-step fade-up">
+        <div class="step-num">02</div>
+        <div class="step-title">Sensors take over</div>
+        <p class="step-desc">IR and ultrasonic sensors constantly scan the environment — detecting obstacles, drop-offs, and incline angles — feeding real-time data to the onboard controller.</p>
+      </div>
+      <div class="hiw-step fade-up">
+        <div class="step-num">03</div>
+        <div class="step-title">You stay in control</div>
+        <p class="step-desc">Switch between electric and manual modes anytime. Use voice commands, the Bluetooth remote, or the high-contrast UI — while SmartDrive Assist handles safety automatically.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="specs-band">
+    <div class="fade-up" style="max-width:520px;">
+      <div class="section-tag">Technical Specs</div>
+      <h2 class="section-title">Under the hood.</h2>
+      <p class="section-sub">Current prototype specifications — updated as development progresses.</p>
+    </div>
+    <div class="specs-grid">
+      <div class="spec-card fade-up">
+        <div class="spec-card-title">Drive and Power</div>
+        <div class="spec-row"><span class="spec-key">Mode switching</span><span class="spec-val ac">Manual and Electric</span></div>
+        <div class="spec-row"><span class="spec-key">Recharging</span><span class="spec-val">Dynamo — kinetic harvest</span></div>
+        <div class="spec-row"><span class="spec-key">Target price</span><span class="spec-val ac">Rs. 10,000</span></div>
+        <div class="spec-row"><span class="spec-key">Chair modification</span><span class="spec-val">None required</span></div>
+      </div>
+      <div class="spec-card fade-up">
+        <div class="spec-card-title">Safety Sensors</div>
+        <div class="spec-row"><span class="spec-key">Obstacle detection</span><span class="spec-val ac">IR sensors</span></div>
+        <div class="spec-row"><span class="spec-key">Edge detection</span><span class="spec-val ac">Ultrasonic</span></div>
+        <div class="spec-row"><span class="spec-key">SOS alert</span><span class="spec-val">One-button, multi-contact</span></div>
+        <div class="spec-row"><span class="spec-key">GPS tracking</span><span class="spec-val">Real-time</span></div>
+      </div>
+      <div class="spec-card fade-up">
+        <div class="spec-card-title">Control and UX</div>
+        <div class="spec-row"><span class="spec-key">Voice control</span><span class="spec-val ac">Yes</span></div>
+        <div class="spec-row"><span class="spec-key">Bluetooth remote</span><span class="spec-val">App and dedicated unit</span></div>
+        <div class="spec-row"><span class="spec-key">UI design</span><span class="spec-val">High contrast, large buttons</span></div>
+        <div class="spec-row"><span class="spec-key">Controller</span><span class="spec-val">Onboard MCU</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE NAV: How it works → Models -->
+  <button class="page-nav-banner light-prev" onclick="showPage('models')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; Models screen</div>
+      <div class="pnb-title">Pick the build.<br/><span>Scale as you go.</span></div>
+      <div class="pnb-sub">Phase-wise model plans and pricing</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+        <div class="pnb-dot"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">Features</button></li>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-features -->
+
+
+<!-- ════════════════ PAGE: MODELS ════════════════ -->
+<div class="pg" id="pg-models">
+  <button class="back-btn" onclick="showPage('features')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to How it works
+                                                         
+    Back to How it works
+
+    Back to Features
+
+  </button>
+
+  <div class="models-wrap">
+    <div class="models-hero fade-up">
+      <div class="section-tag">Models</div>
+      <h2 class="section-title">Choose your SmartDrive Assist phase.</h2>
+      <p class="section-sub" style="margin:0 auto;">Start with essential controls and upgrade to advanced safety and AI capabilities as needed.</p>
+    </div>
+
+    <div class="models-grid">
+      <div class="model-card fade-up">
+        <span class="feat-tag-pill t-control">Phase 1</span>
+        <div class="feat-name">Core Control Model</div>
+        <div class="model-price">₹13,500</div>
+        <ul class="model-features">
+          <li>Simple manual / electric mode toggle</li>
+          <li>Direction control and speed control</li>
+          <li>Brake control with emergency panic button</li>
+        </ul>
+      </div>
+
+      <div class="model-card fade-up">
+        <span class="feat-tag-pill t-safety">Phase 2</span>
+        <div class="feat-name">Safety + Connectivity Model</div>
+        <div class="model-price">₹20,000</div>
+        <ul class="model-features">
+          <li>Everything in Phase 1</li>
+          <li>Edge detection for drop-off prevention</li>
+          <li>Obstacle detection with smart stopping</li>
+          <li>Bluetooth support for wireless control</li>
+        </ul>
+      </div>
+
+      <div class="model-card fade-up">
+        <span class="feat-tag-pill t-emergency">Phase 3</span>
+        <div class="feat-name">AI + Emergency Model</div>
+        <div class="model-price">₹40,000</div>
+        <ul class="model-features">
+          <li>Everything in the previous phase</li>
+          <li>AI-powered assistive tools</li>
+          <li>Everything in Phase 2</li>
+          <li>AI-powered assistive features</li>
+          <li>SOS calling and real-time alert support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE NAV: Models → About -->
+  <button class="page-nav-banner light-prev" onclick="showPage('about')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; About screen</div>
+      <div class="pnb-title">Built by students.<br/><span>Built for impact.</span></div>
+      <div class="pnb-sub">Our mission, the team, FAQ</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('features')">Features</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-models -->
+
+<!-- ════════════════ PAGE: ABOUT ════════════════ -->
+<div class="pg" id="pg-about">
+  <button class="back-btn" onclick="showPage('models')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Models
+  </button>
+  <div class="about-hero">
+    <div class="fade-up">
+      <div class="section-tag">About</div>
+      <h2 class="section-title">Built by students.<br/>Built for impact.</h2>
+      <p class="section-sub" style="margin-bottom:1.5rem;">SmartDrive Assist is a student-built assistive tech initiative under TechCare Warriors — applying real hardware engineering to a problem that affects 75 million people worldwide.</p>
+      <p class="section-sub" style="margin-bottom:2rem;">The project sits at the intersection of servo robotics, inclusive design, and social impact — currently in active prototype development with interest from disability-tech organisations.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a class="btn-primary" href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors site</a>
+        <a class="btn-outline" href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a>
+      </div>
+    </div>
+    <div class="about-cards fade-up">
+      <div class="about-card">
+        <div class="about-label lbl-hardware">Hardware</div>
+        <h4>Real Engineering</h4>
+        <p>Servo motors, IR and ultrasonic sensors, dynamo recharging — engineered components, not just concepts.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-label lbl-design">Design</div>
+        <h4>Inclusive by Default</h4>
+        <p>Works with existing chairs. No user gets excluded based on what they already own.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-label lbl-impact">Impact</div>
+        <h4>SDG Aligned</h4>
+        <p>Directly supports UN SDG 3 — Good Health and SDG 10 — Reduced Inequalities.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-label lbl-team">Team</div>
+        <h4>Student-Led</h4>
+        <p>Conceived, designed, and prototyped by a student team from Gurugram, India.</p>
+      </div>
+      <div class="about-card wide">
+        <div class="about-label lbl-status">Status</div>
+        <h4>Where we are right now</h4>
+        <p>SmartDrive Assist is currently in active prototype development. We have received encouraging feedback from leaders at BraveHeart Soldier Foundation and AssisTech Foundation, and are working toward a fully field-testable version of the system.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION STRIP -->
+  <div class="mission-strip">
+    <blockquote>"Making smart mobility <span>accessible to everyone</span> — not just those who can afford a replacement chair."</blockquote>
+  </div>
+
+  <!-- PAGE NAV: About → FAQ -->
+  <button class="page-nav-banner" onclick="showPage('faq')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; FAQ screen</div>
+      <div class="pnb-title">Got <span>questions?</span></div>
+      <div class="pnb-sub">Common questions answered before you contact us</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-about -->
+
+<!-- ════════════════ PAGE: FAQ ════════════════ -->
+<div class="pg" id="pg-faq">
+  <button class="back-btn" onclick="showPage('about')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to About
+  </button>
+
+  <div class="faq-band">
+    <div class="faq-layout">
+      <div class="fade-up">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">Common questions.</h2>
+        <p class="section-sub">Everything you might want to know before getting in touch.</p>
+      </div>
+      <div class="faq-list fade-up">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Does it work with my existing wheelchair? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Yes — SmartDrive Assist clips onto any standard manual wheelchair frame. No drilling, no permanent modifications. If it is a standard manual chair, it works.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What is the target price? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Rs. 10,000 — a fraction of what a full electric wheelchair costs. This is central to our mission: making smart mobility accessible to everyone, not just those who can afford a Rs. 1 lakh replacement.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How does the auto-recharging work? <span class="faq-icon">+</span></button>
+          <div class="faq-a">A dynamo motor converts kinetic energy from manual pushing into electrical energy stored onboard. The more the chair is pushed manually, the more it charges — no wall plug needed during regular use.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is this a student project or a real product? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Both. It started as a student innovation under TechCare Warriors and has received feedback from BraveHeart Soldier Foundation and AssisTech Foundation. We are actively working toward a fully field-testable prototype.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I collaborate or partner with you? <span class="faq-icon">+</span></button>
+          <div class="faq-a">Absolutely. We are open to partnerships, mentorship, feedback, and investment conversations. Use the contact page and we respond to every message.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE NAV: FAQ → Contact -->
+  <button class="page-nav-banner" onclick="showPage('contact')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
+      <div class="pnb-title">Want to <span>collaborate?</span></div>
+      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+        <div class="pnb-dot"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+</div><!-- end pg-faq -->
+
+
+<!-- ════════════════ PAGE: CONTACT ════════════════ -->
+<div class="pg" id="pg-contact">
+  <button class="back-btn" onclick="showPage('faq')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to FAQ
+  </button>
+  <div class="contact-wrap">
+    <div class="fade-up">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title" style="font-size:clamp(2rem,4vw,2.8rem);">Want to collaborate?</h2>
+      <p class="section-sub" style="max-width:400px;margin-bottom:2rem;">Partnerships, investment, feedback, or just curious — we'd love to hear from you.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-item"><strong>Project</strong>SmartDrive Assist · TechCare Warriors</div>
+        <div class="contact-detail-item"><strong>Based in</strong>Gurugram, India</div>
+        <div class="contact-detail-item"><strong>Project site</strong><a href="https://ivaansingh.com/techcare-warriors" target="_blank" style="color:var(--accent);text-decoration:none;">ivaansingh.com/techcare-warriors</a></div>
+      </div>
+    </div>
+    <div class="contact-form fade-up" id="contact-form-wrap">
+      <p style="font-size:.78rem;color:var(--text-muted);background:var(--off-white);border-radius:8px;padding:.6rem .9rem;line-height:1.5;">Your name and email are optional — they'll be pre-filled in your mail app if you add them, but the message will draft either way.</p>
+      <div class="form-row">
+        <div class="form-field"><label>Name <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label><input id="cf-name" type="text" placeholder="Your name"/></div>
+        <div class="form-field"><label>Email <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label><input id="cf-email" type="email" placeholder="you@email.com"/></div>
+      </div>
+      <div class="form-field">
+        <label>Reason</label>
+        <select id="cf-reason">
+          <option>Partnership / collaboration</option>
+          <option>Investment inquiry</option>
+          <option>Feedback on the prototype</option>
+          <option>Media / press</option>
+          <option>General question</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Message</label><textarea id="cf-msg" rows="5" placeholder="Tell us what's on your mind..."></textarea></div>
+      <div class="captcha-wrap">
+        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" data-callback="enableMailDraft" data-expired-callback="disableMailDraft"></div>
+        <div class="captcha-note">Complete the reCAPTCHA to enable drafting your email.</div>
+      </div>
+      <button class="submit-btn" id="send-btn" onclick="sendMail()" disabled>Open draft in default mail app &rarr;</button>
+    </div>
+    <!-- sent state — shown after mailto fires -->
+    <div id="contact-sent" style="display:none;background:var(--green-light,#e0f8f0);border:1px solid #a0e8cc;border-radius:16px;padding:2rem 1.5rem;text-align:center;">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#00835a;margin-bottom:.5rem;">Your default mail app should be open.</div>
+      <p style="font-size:.88rem;color:#276749;margin-bottom:1.25rem;">The draft is ready for siraajpabby@gmail.com and ivaansingh.k@gmail.com — just hit send. Want to create another draft? Reload the page.</p>
+      <button onclick="window.location.reload()" style="background:#00835a;color:white;border:none;border-radius:8px;padding:.6rem 1.4rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;">Reload page</button>
+    </div>
+  </div>
+
+  <!-- PAGE NAV: Contact → Home (loops) -->
+  <button class="page-nav-banner light-prev" onclick="showPage('home')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Back to start &mdash; Home screen</div>
+      <div class="pnb-title">Mobility is a right,<br/><span>not a privilege.</span></div>
+      <div class="pnb-sub">Return to the beginning</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+      </div>
+      <div class="pnb-arrow" style="transform:rotate(180deg);">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-contact -->
+
+<script>
+  const VALID_PAGES = ['home','features','models','about','faq','contact'];
+
+  // PAGE ROUTER
+  function showPage(id) {
+    if (!VALID_PAGES.includes(id)) id = 'home';
+    document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
+    document.getElementById('pg-' + id).classList.add('active');
+    window.scrollTo(0,0);
+    // update hash so reload lands on same page
+    try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
+    closeDrop();
+    setTimeout(initFades, 50);
+    // update active nav link
+    ['home','features','models','about','faq','contact'].forEach(p => {
+      const el = document.getElementById('nl-' + p);
+      if(el) el.style.color = (p === id) ? 'var(--text-dark)' : '';
+    });
+  }
+
+  // handle browser back/forward
+  window.addEventListener('popstate', function() {
+    const hash = window.location.hash.replace('#','');
+    const id = VALID_PAGES.includes(hash) ? hash : 'home';
+    document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
+    document.getElementById('pg-' + id).classList.add('active');
+    window.scrollTo(0,0);
+    setTimeout(initFades, 50);
+  });
+
+  // on load — read hash and go straight to that page
+  (function() {
+    const hash = window.location.hash.replace('#','');
+    showPage(VALID_PAGES.includes(hash) ? hash : 'home');
+  })();
+
+  function scrollTo(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }, 60);
+  }
+
+  // ABOUT DROPDOWN — click to open, click outside to close
+  function toggleDrop() {
+    const aboutDrop = document.getElementById('about-drop');
+    if (aboutDrop) aboutDrop.classList.toggle('open');
+  }
+  function closeDrop() {
+    const aboutDrop = document.getElementById('about-drop');
+    if (aboutDrop) aboutDrop.classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const drop = document.getElementById('about-drop');
+    if (drop && !drop.contains(e.target)) closeDrop();
+  });
+
+  // MORE FEATURES TOGGLE
+  function toggleMore() {
+    const btn = document.getElementById('moreBtn');
+    const drawer = document.getElementById('moreDrawer');
+    const txt = document.getElementById('moreBtnText');
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    txt.textContent = isOpen ? 'Show fewer details' : 'Show all details';
+    if (isOpen) setTimeout(() => drawer.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+  }
+
+  function enableMailDraft() {
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) sendBtn.disabled = false;
+  }
+
+  function disableMailDraft() {
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) sendBtn.disabled = true;
+  }
+
+  // SEND MAIL — opens user's default mail app, then hides the form
+  function sendMail() {
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn && sendBtn.disabled) return;
+
+    const name    = (document.getElementById('cf-name').value  || '').trim();
+    const email   = (document.getElementById('cf-email').value || '').trim();
+    const reason  = document.getElementById('cf-reason').value;
+    const msg     = (document.getElementById('cf-msg').value   || '').trim();
+
+    const subject = encodeURIComponent('SmartDrive Assist — ' + reason);
+    let body = '';
+    if (name)  body += 'Name: ' + name + '\n';
+    if (email) body += 'Email: ' + email + '\n';
+    body += '\n' + (msg || '(no message entered)');
+
+    const recipients = 'siraajpabby@gmail.com,ivaansingh.k@gmail.com';
+    window.location.href = 'mailto:' + recipients + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+
+    // hide form, show sent state
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('contact-sent').style.display = 'block';
+  }
+
+  // FAQ ACCORDION
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+  }
+
+  // FADE-UP OBSERVER
+  function initFades() {
+    const activePg = document.querySelector('.pg.active');
+    if (!activePg) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:.08});
+    activePg.querySelectorAll('.fade-up').forEach(el => {
+      el.classList.remove('visible');
+      obs.observe(el);
+    });
+  }
+  initFades();
+</script>
+</body>
+</html>
