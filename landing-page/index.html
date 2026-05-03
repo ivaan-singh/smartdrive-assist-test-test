@@ -66,15 +66,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   display:flex;align-items:center;justify-content:space-between;
   padding:3rem 5%;background:var(--text-dark);cursor:pointer;
   border:none;width:100%;font-family:'DM Sans',sans-serif;
-  transition:background .25s;position:relative;overflow:hidden;
-  text-align:left;
+  transition:background .25s,transform .2s;position:relative;overflow:hidden;
+  text-align:left;gap:1rem;
 }
 .page-nav-banner::before{
   content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,transparent 60%,rgba(0,87,255,.1) 100%);
   pointer-events:none;
 }
-.page-nav-banner:hover{background:#181b28;}
+.page-nav-banner:hover{background:#181b28;transform:translateY(-2px);}
+.page-nav-banner:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 /* light-prev: banner follows a white/light section — muted grey */
 .page-nav-banner.light-prev{background:#dddfe5;border-top:1px solid #c8cad2;padding-top:3.75rem;padding-bottom:3.75rem;}
 .page-nav-banner.light-prev::before{display:none;}
@@ -152,8 +153,8 @@ h1 .hl{color:var(--accent);}
 /* ── PAGE: FEATURES ── */
 #pg-features{}
 /* BACK BUTTON */
-.back-btn{display:inline-flex;align-items:center;gap:.45rem;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--text-muted);padding:1.25rem 5% .5rem;transition:color .2s;}
-.back-btn:hover{color:var(--text-dark);}
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;background:var(--off-white);border:1px solid var(--border);border-radius:999px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--text-muted);padding:.55rem 1rem;margin:1.25rem 0 .5rem 5%;transition:color .2s,transform .2s,background .2s,border-color .2s;}
+.back-btn:hover{color:var(--text-dark);background:var(--white);border-color:#c7cbda;transform:translateY(-1px);}
 .back-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;}
 .back-btn:hover svg{transform:translateX(-3px);}
 .features-hero{padding:60px 5% 0;text-align:center;max-width:600px;margin:0 auto;}
@@ -273,14 +274,14 @@ h1 .hl{color:var(--accent);}
 .captcha-note{font-size:.76rem;color:var(--text-muted);}
 
 /* FOOTER */
-footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;}
+footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3.5rem 5%;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;border-top:1px solid rgba(255,255,255,.08);}
 .foot-brand .foot-logo{font-family:'Syne',sans-serif;font-weight:800;color:white;font-size:1rem;text-decoration:none;display:block;margin-bottom:.6rem;cursor:pointer;background:none;border:none;}
 .foot-brand .foot-logo span{color:var(--accent-mid);}
 .foot-brand p{font-size:.8rem;line-height:1.65;max-width:220px;}
 .foot-col h5{font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;color:white;margin-bottom:.9rem;text-transform:uppercase;letter-spacing:.05em;}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
 .foot-col ul li{cursor:pointer;}
-.foot-col ul li a,.foot-col ul li button{color:rgba(255,255,255,.38);text-decoration:none;font-size:.82rem;transition:color .2s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
+.foot-col ul li a,.foot-col ul li button{color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem;transition:color .2s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
 .foot-col ul li a:hover,.foot-col ul li button:hover{color:white;}
 .foot-bottom{background:#080a10;padding:.9rem 5%;display:flex;justify-content:space-between;align-items:center;font-size:.77rem;color:rgba(255,255,255,.28);}
 
@@ -325,7 +326,9 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <li><a onclick="showPage('features')" id="nl-features">How it works</a></li>
     <li><a onclick="showPage('models')" id="nl-models">Models</a></li>
     <li><a onclick="showPage('about')" id="nl-about">About</a></li>
+    <li><a onclick="showPage('behind')" id="nl-behind">Behind the Build</a></li>
     <li><a onclick="showPage('faq')" id="nl-faq">FAQ</a></li>
+    <li><a onclick="showPage('gallery')" id="nl-gallery">Gallery</a></li>
     <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
     <li><a class="nav-cta" onclick="showPage('contact')">Get in touch</a></li>
   </ul>
@@ -827,12 +830,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <blockquote>"Making smart mobility <span>accessible to everyone</span> — not just those who can afford a replacement chair."</blockquote>
   </div>
 
-  <!-- PAGE NAV: About → FAQ -->
-  <button class="page-nav-banner" onclick="showPage('faq')">
+  <!-- PAGE NAV: About → Behind the Build -->
+  <button class="page-nav-banner" onclick="showPage('behind')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; FAQ screen</div>
-      <div class="pnb-title">Got <span>questions?</span></div>
-      <div class="pnb-sub">Common questions answered before you contact us</div>
+      <div class="pnb-eyebrow">Next &mdash; Behind the Build screen</div>
+      <div class="pnb-title">Story, process,<br/><span>and learnings.</span></div>
+      <div class="pnb-sub">How SmartDrive Assist was designed and built</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -885,11 +888,36 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 
 </div><!-- end pg-about -->
 
-<!-- ════════════════ PAGE: FAQ ════════════════ -->
-<div class="pg" id="pg-faq">
+
+<!-- ════════════════ PAGE: BEHIND THE BUILD ════════════════ -->
+<div class="pg" id="pg-behind">
   <button class="back-btn" onclick="showPage('about')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to About
+  </button>
+  <section class="section">
+    <div class="section-tag">Behind the Build</div>
+    <h2 class="section-title">From idea to working prototype.</h2>
+    <p class="section-sub">SmartDrive Assist was built through rapid iteration, field feedback, and user-first engineering choices.</p>
+    <div class="about-cards" style="margin-top:2rem;max-width:980px;">
+      <div class="about-card"><h4>Problem First</h4><p>We focused on affordability and compatibility with existing manual wheelchairs from day one.</p></div>
+      <div class="about-card"><h4>Prototype Iterations</h4><p>Each build cycle improved safety logic, control feel, and ergonomics based on practical testing.</p></div>
+      <div class="about-card wide"><h4>What’s Next</h4><p>Our next milestones include expanded field testing, module refinement, and better deployment readiness.</p></div>
+    </div>
+  </section>
+  <button class="page-nav-banner" onclick="showPage('faq')">
+    <div class="pnb-left"><div class="pnb-eyebrow">Next &mdash; FAQ screen</div><div class="pnb-title">Got <span>questions?</span></div><div class="pnb-sub">Answers about pricing, compatibility, and collaboration</div></div>
+    <div class="pnb-right"><div class="pnb-dots"><div class="pnb-dot"></div><div class="pnb-dot on"></div><div class="pnb-dot"></div></div><div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+  </button>
+  <footer><div class="foot-brand"><button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button><p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p></div></footer>
+  <div class="foot-bottom"><span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span><span>A student innovation project</span></div>
+</div>
+
+<!-- ════════════════ PAGE: FAQ ════════════════ -->
+<div class="pg" id="pg-faq">
+  <button class="back-btn" onclick="showPage('behind')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Behind the Build
   </button>
 
   <div class="faq-band">
@@ -924,12 +952,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     </div>
   </div>
 
-  <!-- PAGE NAV: FAQ → Contact -->
-  <button class="page-nav-banner" onclick="showPage('contact')">
+  <!-- PAGE NAV: FAQ → Gallery -->
+  <button class="page-nav-banner" onclick="showPage('gallery')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
-      <div class="pnb-title">Want to <span>collaborate?</span></div>
-      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
+      <div class="pnb-eyebrow">Next &mdash; Gallery screen</div>
+      <div class="pnb-title">A look at the build.<br/><span>Gallery next.</span></div>
+      <div class="pnb-sub">Preview visuals and snapshots from development</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -982,11 +1010,28 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 </div><!-- end pg-faq -->
 
 
-<!-- ════════════════ PAGE: CONTACT ════════════════ -->
-<div class="pg" id="pg-contact">
+
+<!-- ════════════════ PAGE: GALLERY ════════════════ -->
+<div class="pg" id="pg-gallery">
   <button class="back-btn" onclick="showPage('faq')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to FAQ
+  </button>
+  <section class="section">
+    <div class="section-tag">Gallery</div>
+    <h2 class="section-title">Gallery coming soon.</h2>
+    <p class="section-sub">We’re curating prototype photos, test snapshots, and development highlights for this section.</p>
+  </section>
+  <button class="page-nav-banner" onclick="showPage('contact')"><div class="pnb-left"><div class="pnb-eyebrow">Next &mdash; Contact screen</div><div class="pnb-title">Want to <span>collaborate?</span></div><div class="pnb-sub">Partnerships, investment, press, general enquiries</div></div><div class="pnb-right"><div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div></button>
+  <footer><div class="foot-brand"><button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button><p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p></div></footer>
+  <div class="foot-bottom"><span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span><span>A student innovation project</span></div>
+</div>
+
+<!-- ════════════════ PAGE: CONTACT ════════════════ -->
+<div class="pg" id="pg-contact">
+  <button class="back-btn" onclick="showPage('gallery')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Gallery
   </button>
   <div class="contact-wrap">
     <div class="fade-up">
@@ -1088,20 +1133,21 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 </div><!-- end pg-contact -->
 
 <script>
-  const VALID_PAGES = ['home','features','models','about','faq','contact'];
+  const VALID_PAGES = ['home','features','models','about','behind','faq','gallery','contact'];
 
   // PAGE ROUTER
   function showPage(id) {
     if (!VALID_PAGES.includes(id)) id = 'home';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    const targetPage = document.getElementById('pg-' + id) || document.getElementById('pg-home');
+    targetPage.classList.add('active');
     window.scrollTo(0,0);
     // update hash so reload lands on same page
     try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
     closeDrop();
     setTimeout(initFades, 50);
     // update active nav link
-    ['home','features','models','about','faq','contact'].forEach(p => {
+    ['home','features','models','about','behind','faq','gallery','contact'].forEach(p => {
       const el = document.getElementById('nl-' + p);
       if(el) el.style.color = (p === id) ? 'var(--text-dark)' : '';
     });
@@ -1112,7 +1158,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     const hash = window.location.hash.replace('#','');
     const id = VALID_PAGES.includes(hash) ? hash : 'home';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    const targetPage = document.getElementById('pg-' + id) || document.getElementById('pg-home');
+    targetPage.classList.add('active');
     window.scrollTo(0,0);
     setTimeout(initFades, 50);
   });
