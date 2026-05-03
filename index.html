@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <title>SmartDrive Assist</title>
 <script>
-  var base = window.location.pathname.replace(/\/$/, '');
-  window.location.replace(base + '/landing-page/');
+  var path = window.location.pathname.replace(/\/$/, '');
+  if (/\/landing-page$/.test(path)) {
+    return;
+  }
+  window.location.replace(path + '/landing-page/');
 </script>
 </head>
 <body></body>
