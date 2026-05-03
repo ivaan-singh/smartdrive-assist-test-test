@@ -849,12 +849,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
     <blockquote>"Making smart mobility <span>accessible to everyone</span> — not just those who can afford a replacement chair."</blockquote>
   </div>
 
-  <!-- PAGE NAV: About → FAQ -->
-  <button class="page-nav-banner" onclick="showPage('faq')">
+  <!-- PAGE NAV: About → Behind the Build -->
+  <button class="page-nav-banner" onclick="showPage('behind')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; FAQ screen</div>
-      <div class="pnb-title">Got <span>questions?</span></div>
-      <div class="pnb-sub">Common questions answered before you contact us</div>
+      <div class="pnb-eyebrow">Next &mdash; Behind the Build screen</div>
+      <div class="pnb-title">See the <span>build journey.</span></div>
+      <div class="pnb-sub">From prototype cycles to upcoming milestones</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -925,6 +925,63 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
       <div class="about-card"><h4>Next milestones</h4><p>Upcoming work includes extended field testing, enclosure hardening, and production-ready module integration.</p></div>
     </div>
   </section>
+
+  <!-- PAGE NAV: Behind the Build → FAQ -->
+  <button class="page-nav-banner light-prev" onclick="showPage('faq')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; FAQ screen</div>
+      <div class="pnb-title">Got <span>questions?</span></div>
+      <div class="pnb-sub">Common questions answered before you contact us</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot"></div>
+        <div class="pnb-dot on"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><button onclick="showPage('behind')">Behind the Build</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
 </div>
 
 <!-- ════════════════ PAGE: FAQ ════════════════ -->
@@ -1202,8 +1259,14 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
   // PAGE ROUTER
   function showPage(id) {
     if (!VALID_PAGES.includes(id)) id = 'home';
+    let target = document.getElementById('pg-' + id);
+    if (!target) {
+      id = 'home';
+      target = document.getElementById('pg-home');
+      if (!target) return;
+    }
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    target.classList.add('active');
     window.scrollTo(0,0);
     // update hash so reload lands on same page
     try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
@@ -1221,8 +1284,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
   window.addEventListener('popstate', function() {
     const hash = window.location.hash.replace('#','');
     const id = VALID_PAGES.includes(hash) ? hash : 'home';
+    const target = document.getElementById('pg-' + id) || document.getElementById('pg-home');
+    if (!target) return;
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    target.classList.add('active');
     window.scrollTo(0,0);
     setTimeout(initFades, 50);
   });
