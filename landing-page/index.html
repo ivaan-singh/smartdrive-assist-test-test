@@ -138,7 +138,7 @@ h1 .hl{color:var(--accent);}
 .stats-item .desc{font-size:.79rem;color:rgba(255,255,255,.4);margin-top:5px;font-weight:300;}
 
 /* home testimonials preview */
-.testi-preview{background:var(--off-white);padding:80px 5%;}
+.testi-preview{background:var(--white);padding:80px 5%;}
 .testi-preview-header{text-align:center;max-width:500px;margin:0 auto 3rem;}
 .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;max-width:960px;margin:0 auto;}
 .testi-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2rem;}
@@ -325,7 +325,9 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <li><a onclick="showPage('features')" id="nl-features">How it works</a></li>
     <li><a onclick="showPage('models')" id="nl-models">Models</a></li>
     <li><a onclick="showPage('about')" id="nl-about">About</a></li>
+    <li><a onclick="showPage('behind')" id="nl-behind">Behind the Build</a></li>
     <li><a onclick="showPage('faq')" id="nl-faq">FAQ</a></li>
+    <li><a onclick="showPage('gallery')" id="nl-gallery">Gallery</a></li>
     <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
     <li><a class="nav-cta" onclick="showPage('contact')">Get in touch</a></li>
   </ul>
@@ -341,7 +343,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <h1>Mobility is a right,<br/><span class="hl">not a privilege.</span></h1>
       <p class="hero-sub">SmartDrive Assist is a bolt-on intelligent system that upgrades any manual wheelchair into a full-featured smart mobility aid — no replacement needed, at a target price of just Rs. 10,000.</p>
       <div class="btn-group">
-        <button class="btn-primary" onclick="showPage('features')">Explore how it works</button>
+        <button class="btn-primary" onclick="showPage('behind')">Explore Behind the Build</button>
         <button class="hero-link" onclick="showPage('features')">How it works &rarr;</button>
       </div>
       <div class="hero-trust">
@@ -368,37 +370,6 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <div class="stats-item"><div class="num">9</div><div class="desc">smart modules, one add-on</div></div>
     <div class="stats-item"><div class="num">Rs.<span>10K</span></div><div class="desc">target retail price</div></div>
     <div class="stats-item"><div class="num">0</div><div class="desc">chair replacements needed</div></div>
-  </div>
-
-  <!-- TESTIMONIALS PREVIEW -->
-  <div class="testi-preview" id="testi">
-    <div class="testi-preview-header fade-up">
-      <div class="section-tag">What people say</div>
-      <h2 class="section-title">Expert feedback.</h2>
-      <p class="section-sub" style="margin:0 auto;">Feedback from founders and directors who have reviewed SmartDrive Assist firsthand.</p>
-    </div>
-    <div class="testi-grid fade-up">
-      <div class="testi-card">
-        <p class="testi-quote">SmartDrive Assist is an initiative with significant potential for social impact. It can grow from a student innovation into a product that meaningfully improves the quality of life for hundreds of thousands.</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent);">AS</div>
-          <div>
-            <div class="testi-name">Anuj Sharma</div>
-            <div class="testi-role">Director, BraveHeart Soldier Foundation</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--green);">PM</div>
-          <div>
-            <div class="testi-name">Prateek Madhav</div>
-            <div class="testi-role">CEO, AssisTech Foundation</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- HOME: WHY WE BUILT IT + FEATURES TEASER -->
@@ -477,6 +448,65 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       </div>
     </div>
   </div>
+
+  <!-- TESTIMONIALS PREVIEW -->
+  <div class="testi-preview" id="testi">
+    <div class="testi-preview-header fade-up">
+      <div class="section-tag">What people say</div>
+      <h2 class="section-title">User feedback.</h2>
+      <p class="section-sub" style="margin:0 auto;">Feedback from users and caregivers who interacted with the SmartDrive Assist concept.</p>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <p class="testi-quote">The idea feels practical and respectful of how we already use our chairs day-to-day. If this becomes affordable, it can make a real difference.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent);">RW</div>
+          <div>
+            <div class="testi-name">Riya, Wheelchair User</div>
+            <div class="testi-role">Early concept feedback session</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">A retrofit approach is exactly what many families need. It reduces cost pressure while still adding meaningful safety and mobility support.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">AC</div>
+          <div>
+            <div class="testi-name">Aman, Caregiver</div>
+            <div class="testi-role">Prototype usability review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-preview-header fade-up" style="margin-top:3rem;">
+      <h2 class="section-title">Expert feedback.</h2>
+      <p class="section-sub" style="margin:0 auto;">Feedback from founders and directors who have reviewed SmartDrive Assist firsthand.</p>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <p class="testi-quote">SmartDrive Assist is an initiative with significant potential for social impact. It can grow from a student innovation into a product that meaningfully improves the quality of life for hundreds of thousands.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent);">AS</div>
+          <div>
+            <div class="testi-name">Anuj Sharma</div>
+            <div class="testi-role">Director, BraveHeart Soldier Foundation</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">PM</div>
+          <div>
+            <div class="testi-name">Prateek Madhav</div>
+            <div class="testi-role">CEO, AssisTech Foundation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- PAGE NAV: Home → How it works -->
   <button class="page-nav-banner light-prev" onclick="showPage('features')">
@@ -885,6 +915,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 
 </div><!-- end pg-about -->
 
+
+
 <!-- ════════════════ PAGE: FAQ ════════════════ -->
 <div class="pg" id="pg-faq">
   <button class="back-btn" onclick="showPage('about')">
@@ -924,12 +956,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     </div>
   </div>
 
-  <!-- PAGE NAV: FAQ → Contact -->
-  <button class="page-nav-banner" onclick="showPage('contact')">
+  <!-- PAGE NAV: FAQ → Gallery -->
+  <button class="page-nav-banner" onclick="showPage('gallery')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
-      <div class="pnb-title">Want to <span>collaborate?</span></div>
-      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
+      <div class="pnb-eyebrow">Next &mdash; Gallery screen</div>
+      <div class="pnb-title">See the <span>Gallery</span></div>
+      <div class="pnb-sub">Snapshots, visuals, and updates from the build</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -982,11 +1014,58 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 </div><!-- end pg-faq -->
 
 
-<!-- ════════════════ PAGE: CONTACT ════════════════ -->
-<div class="pg" id="pg-contact">
+<!-- ════════════════ PAGE: GALLERY ════════════════ -->
+<div class="pg" id="pg-gallery">
   <button class="back-btn" onclick="showPage('faq')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to FAQ
+  </button>
+
+  <section class="section">
+    <div class="fade-up" style="max-width:760px;margin:0 auto;text-align:center;">
+      <div class="section-tag">Gallery</div>
+      <h2 class="section-title">Gallery coming soon.</h2>
+      <p class="section-sub" style="margin:0 auto;">We are curating prototype photos, build progress snapshots, and demo visuals. Check back soon for updates.</p>
+    </div>
+  </section>
+
+  <button class="page-nav-banner light-prev" onclick="showPage('behind')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; Behind the Build screen</div>
+      <div class="pnb-title">Go <span>Behind the Build</span></div>
+      <div class="pnb-sub">See the process, milestones, and build notes</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div><div class="pnb-dot"></div><div class="pnb-dot on"></div>
+      </div>
+      <div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </div>
+  </button>
+
+  <footer><div class="foot-brand"><button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button><p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p></div></footer>
+  <div class="foot-bottom"><span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span><span>A student innovation project</span></div>
+</div><!-- end pg-gallery -->
+
+<div class="pg" id="pg-behind">
+  <button class="back-btn" onclick="showPage('gallery')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Gallery
+  </button>
+  <section class="section"><div class="fade-up" style="max-width:900px;margin:0 auto;">
+    <div class="section-tag">Behind the Build</div><h2 class="section-title">How SmartDrive Assist is being built.</h2>
+    <p class="section-sub">From early sketches to tested modules, this page highlights the decisions, experiments, and milestones shaping the project.</p>
+  </div></section>
+  <button class="page-nav-banner" onclick="showPage('contact')"><div class="pnb-left"><div class="pnb-eyebrow">Next &mdash; Contact screen</div><div class="pnb-title">Ready to <span>connect?</span></div><div class="pnb-sub">Partnerships, investment, press, and enquiries</div></div><div class="pnb-right"><div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div></button>
+  <footer><div class="foot-brand"><button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button><p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p></div></footer>
+  <div class="foot-bottom"><span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span><span>A student innovation project</span></div>
+</div><!-- end pg-behind -->
+
+
+<div class="pg" id="pg-contact">
+  <button class="back-btn" onclick="showPage('behind')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Behind the Build
   </button>
   <div class="contact-wrap">
     <div class="fade-up">
@@ -1088,20 +1167,21 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 </div><!-- end pg-contact -->
 
 <script>
-  const VALID_PAGES = ['home','features','models','about','faq','contact'];
+  const VALID_PAGES = ['home','features','models','about','behind','faq','gallery','contact'];
 
   // PAGE ROUTER
   function showPage(id) {
     if (!VALID_PAGES.includes(id)) id = 'home';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    const targetPage = document.getElementById('pg-' + id) || document.getElementById('pg-home');
+    targetPage.classList.add('active');
     window.scrollTo(0,0);
     // update hash so reload lands on same page
     try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
     closeDrop();
     setTimeout(initFades, 50);
     // update active nav link
-    ['home','features','models','about','faq','contact'].forEach(p => {
+    ['home','features','models','about','behind','faq','gallery','contact'].forEach(p => {
       const el = document.getElementById('nl-' + p);
       if(el) el.style.color = (p === id) ? 'var(--text-dark)' : '';
     });
@@ -1112,7 +1192,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     const hash = window.location.hash.replace('#','');
     const id = VALID_PAGES.includes(hash) ? hash : 'home';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
-    document.getElementById('pg-' + id).classList.add('active');
+    const targetPage = document.getElementById('pg-' + id) || document.getElementById('pg-home');
+    targetPage.classList.add('active');
     window.scrollTo(0,0);
     setTimeout(initFades, 50);
   });
