@@ -329,6 +329,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
     <li><a onclick="showPage('about')" id="nl-about">About</a></li>
     <li><a onclick="showPage('behind')" id="nl-behind">Behind the build</a></li>
     <li><a onclick="showPage('faq')" id="nl-faq">FAQ</a></li>
+    <li><a onclick="showPage('gallery')" id="nl-gallery">Gallery</a></li>
     <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
     <li><a class="nav-cta" onclick="showPage('contact')">Get in touch</a></li>
   </ul>
@@ -1022,12 +1023,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
     </div>
   </div>
 
-  <!-- PAGE NAV: FAQ → Contact -->
-  <button class="page-nav-banner" onclick="showPage('contact')">
+  <!-- PAGE NAV: FAQ → Gallery -->
+  <button class="page-nav-banner" onclick="showPage('gallery')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
-      <div class="pnb-title">Want to <span>collaborate?</span></div>
-      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
+      <div class="pnb-eyebrow">Next &mdash; Gallery screen</div>
+      <div class="pnb-title">Explore the <span>gallery.</span></div>
+      <div class="pnb-sub">Photos and media from the build journey</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -1080,11 +1081,78 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
 </div><!-- end pg-faq -->
 
 
-<!-- ════════════════ PAGE: CONTACT ════════════════ -->
-<div class="pg" id="pg-contact">
+<!-- ════════════════ PAGE: GALLERY ════════════════ -->
+<div class="pg" id="pg-gallery">
   <button class="back-btn" onclick="showPage('faq')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to FAQ
+  </button>
+
+  <section class="section" style="max-width:1000px;margin:0 auto;">
+    <div class="section-tag">Gallery</div>
+    <h2 class="section-title">Gallery coming soon.</h2>
+    <p class="section-sub" style="max-width:720px;">This section will showcase photos, demo clips, and prototype moments from SmartDrive Assist.</p>
+  </section>
+
+  <button class="page-nav-banner light-prev" onclick="showPage('contact')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
+      <div class="pnb-title">Want to <span>collaborate?</span></div>
+      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
+    </div>
+    <div class="pnb-right">
+      <div class="pnb-dots">
+        <div class="pnb-dot"></div><div class="pnb-dot"></div><div class="pnb-dot"></div><div class="pnb-dot on"></div><div class="pnb-dot"></div>
+      </div>
+      <div class="pnb-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </button>
+
+  <footer>
+    <div class="foot-brand">
+      <button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button>
+      <p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><button onclick="showPage('features')">How it works</button></li>
+        <li><button onclick="showPage('models')">Models</button></li>
+        <li><button onclick="showPage('features')">Specifications</button></li>
+        <li><button onclick="showPage('faq')">FAQ</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><button onclick="showPage('about')">Our mission</button></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
+        <li><button onclick="showPage('behind')">Behind the Build</button></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><button onclick="showPage('contact')">Get in touch</button></li>
+        <li><a href="https://ivaan-singh.github.io" target="_blank">Team site</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">
+    <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
+    <span>A student innovation project</span>
+  </div>
+
+</div><!-- end pg-gallery -->
+
+
+<!-- ════════════════ PAGE: CONTACT ════════════════ -->
+<div class="pg" id="pg-contact">
+  <button class="back-btn" onclick="showPage('gallery')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Gallery
   </button>
   <div class="contact-wrap">
     <div class="fade-up">
@@ -1186,7 +1254,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
 </div><!-- end pg-contact -->
 
 <script>
-  const VALID_PAGES = ['home','features','models','about','behind','faq','contact'];
+  const VALID_PAGES = ['home','features','models','about','behind','faq','gallery','contact'];
 
   // PAGE ROUTER
   function showPage(id) {
@@ -1199,6 +1267,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5% 2.
     closeDrop();
     setTimeout(initFades, 50);
     // update active nav link
+    ['home','features','models','about','behind','faq','gallery','contact'].forEach(p => {
     ['home','features','models','about','behind','faq','contact'].forEach(p => {
       const el = document.getElementById('nl-' + p);
       if(el) el.style.color = (p === id) ? 'var(--text-dark)' : '';
