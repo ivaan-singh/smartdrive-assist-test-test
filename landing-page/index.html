@@ -371,7 +371,59 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <div class="stats-item"><div class="num">Rs.<span>10K</span></div><div class="desc">target retail price</div></div>
     <div class="stats-item"><div class="num">0</div><div class="desc">chair replacements needed</div></div>
   </div>
+  <!-- TESTIMONIALS PREVIEW -->
+  <div class="testi-preview" id="testi">
+    <div class="testi-preview-header fade-up">
+      <div class="section-tag">What people say</div>
+      <h2 class="section-title">User feedback.</h2>
+      <p class="section-sub" style="margin:0 auto;">Feedback from users and caregivers who interacted with the SmartDrive Assist concept.</p>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <p class="testi-quote">The idea feels practical and respectful of how we already use our chairs day-to-day. If this becomes affordable, it can make a real difference.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent);">RW</div>
+          <div>
+            <div class="testi-name">Riya, Wheelchair User</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">A retrofit approach is exactly what many families need. It reduces cost pressure while still adding meaningful safety and mobility support.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">AC</div>
+          <div>
+            <div class="testi-name">Aman, Caregiver</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="testi-preview-header fade-up" style="margin-top:3rem;">
+      <h2 class="section-title">Expert feedback.</h2>
+      <p class="section-sub" style="margin:0 auto;">Feedback from founders and directors who have reviewed SmartDrive Assist firsthand.</p>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <p class="testi-quote">SmartDrive Assist is an initiative with significant potential for social impact. It can grow from a student innovation into a product that meaningfully improves the quality of life for hundreds of thousands.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent);">AS</div>
+          <div>
+            <div class="testi-name">Anuj Sharma, Director BraveHeart Soldier Foundation</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">PM</div>
+          <div>
+            <div class="testi-name">Prateek Madhav, CEO AssisTEch Foundation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- HOME: WHY WE BUILT IT + FEATURES TEASER -->
   <div style="background:var(--white);padding:70px 5%;">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto;align-items:center;" class="fade-up">
@@ -919,9 +971,26 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 
 <!-- ════════════════ PAGE: FAQ ════════════════ -->
 <div class="pg" id="pg-faq">
+<div class="pg" id="pg-behind">
   <button class="back-btn" onclick="showPage('about')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to About
+  </button>
+  <section class="section"><div class="fade-up" style="max-width:900px;margin:0 auto;">
+    <div class="section-tag">Behind the Build</div><h2 class="section-title">How SmartDrive Assist is being built.</h2>
+    <p class="section-sub">From early sketches to tested modules, this page highlights the decisions, experiments, and milestones shaping the project.</p>
+  </div></section>
+  <button class="page-nav-banner" onclick="showPage('faq')"><div class="pnb-left"><div class="pnb-eyebrow">Next &mdash; FAQ screen</div><div class="pnb-title">Questions? Read the <span>FAQ</span></div><div class="pnb-sub">Answers about compatibility, pricing, and roadmap</div></div><div class="pnb-right"><div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div></button>
+  <footer><div class="foot-brand"><button class="foot-logo" onclick="showPage('home')">SmartDrive <span>Assist.</span></button><p>A TechCare Warriors initiative. Making smart mobility accessible for everyone, everywhere.</p></div></footer>
+  <div class="foot-bottom"><span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span><span>A student innovation project</span></div>
+</div><!-- end pg-behind -->
+
+
+<!-- ════════════════ PAGE: FAQ ════════════════ -->
+<div class="pg" id="pg-faq">
+  <button class="back-btn" onclick="showPage('behind')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Behind the Build
   </button>
 
   <div class="faq-band">
@@ -1015,6 +1084,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 
 
 <!-- ════════════════ PAGE: GALLERY ════════════════ -->
+<!-- ════════════════ PAGE: CONTACT ════════════════ -->
 <div class="pg" id="pg-gallery">
   <button class="back-btn" onclick="showPage('faq')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -1028,12 +1098,16 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <p class="section-sub" style="margin:0 auto;">We are curating prototype photos, build progress snapshots, and demo visuals. Check back soon for updates.</p>
     </div>
   </section>
-
   <button class="page-nav-banner light-prev" onclick="showPage('behind')">
     <div class="pnb-left">
       <div class="pnb-eyebrow">Next &mdash; Behind the Build screen</div>
       <div class="pnb-title">Go <span>Behind the Build</span></div>
       <div class="pnb-sub">See the process, milestones, and build notes</div>
+  <button class="page-nav-banner light-prev" onclick="showPage('contact')">
+    <div class="pnb-left">
+      <div class="pnb-eyebrow">Next &mdash; Contact screen</div>
+      <div class="pnb-title">Want to <span>collaborate?</span></div>
+      <div class="pnb-sub">Partnerships, investment, press, general enquiries</div>
     </div>
     <div class="pnb-right">
       <div class="pnb-dots">
@@ -1066,6 +1140,11 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   <button class="back-btn" onclick="showPage('behind')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to Behind the Build
+
+<div class="pg" id="pg-contact">
+  <button class="back-btn" onclick="showPage('gallery')">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to Gallery
   </button>
   <div class="contact-wrap">
     <div class="fade-up">
