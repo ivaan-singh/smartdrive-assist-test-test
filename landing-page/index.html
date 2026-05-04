@@ -54,6 +54,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .section-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.65rem;}
 .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:.9rem;}
 .section-sub{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.75;max-width:520px;}
+.journey-map{position:relative;max-width:840px;margin-top:1.75rem;padding:1.25rem 0;}
+.journey-road{position:absolute;left:50%;top:1.1rem;bottom:1.1rem;width:min(340px,70%);transform:translateX(-50%);pointer-events:none;opacity:.9;}
+.journey-road svg{width:100%;height:100%;}
+.journey-road path{stroke:var(--accent);stroke-width:18;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.18;}
+.journey-road .road-center{stroke:var(--accent-mid);stroke-width:3;stroke-dasharray:6 12;opacity:.75;}
+.journey-step{position:relative;display:flex;align-items:flex-start;gap:.9rem;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem 1rem 1rem .85rem;max-width:360px;box-shadow:0 10px 24px rgba(0,0,0,.03);}
+.journey-step + .journey-step{margin-top:1.1rem;}
+.journey-step.left{margin-right:auto;}
+.journey-step.right{margin-left:auto;}
+.journey-dot{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.journey-text{font-size:.94rem;line-height:1.6;color:var(--text-dark);}
+@media(max-width:760px){
+  .journey-road{left:26px;transform:none;width:120px;}
+  .journey-step,.journey-step.left,.journey-step.right{max-width:100%;margin-left:0;margin-right:0;padding-left:.8rem;}
+  .journey-map{padding-left:.1rem;}
+}
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .btn-primary{background:var(--accent);color:white;padding:.72rem 1.7rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-block;}
@@ -327,7 +343,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <li><a onclick="showPage('about')" id="nl-about">About</a></li>
     <li><a onclick="showPage('faq')" id="nl-faq">FAQ</a></li>
     <li><a onclick="showPage('gallery')" id="nl-gallery">Gallery</a></li>
-    <li><a onclick="showPage('behind')" id="nl-behind">Behind the Build</a></li>
+    <li><a onclick="showPage('behind')" id="nl-behind">Our Journey</a></li>
     <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
     <li><a class="nav-cta" onclick="showPage('contact')">Get in touch</a></li>
   </ul>
@@ -343,7 +359,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <h1>Mobility is a right,<br/><span class="hl">not a privilege.</span></h1>
       <p class="hero-sub">SmartDrive Assist is a bolt-on intelligent system that upgrades any manual wheelchair into a full-featured smart mobility aid — no replacement needed, at a target price of just Rs. 10,000.</p>
       <div class="btn-group">
-        <button class="btn-primary" onclick="showPage('behind')">Explore Behind the Build</button>
+        <button class="btn-primary" onclick="showPage('behind')">Explore Our Journey</button>
         <button class="hero-link" onclick="showPage('features')">How it works &rarr;</button>
       </div>
       <div class="hero-trust">
@@ -452,19 +468,18 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   <!-- HOME: USER FEEDBACK -->
   <div class="testi-preview" id="testi-user" style="background:var(--white);">
     <div class="testi-preview-header fade-up">
-      <div class="section-tag">User feedback</div>
-      <h2 class="section-title">Voices from lived experience.</h2>
+      <div class="section-tag">What Users Say</div>
+      <h2 class="section-title">User Feed Forward</h2>
       <p class="section-sub" style="margin:0 auto;">Conversations with wheelchair users helped shape how SmartDrive Assist focuses on dignity, control, and daily usability.</p>
     </div>
     <div class="testi-grid fade-up">
       <div class="testi-card">
         <p class="testi-quote">Anything that gives freedom along with mobility is the true goal.</p>
-        <p class="testi-quote">This kind of assistive system can make independent movement less exhausting and more reliable in day-to-day life.</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:var(--accent);">VK</div>
           <div>
             <div class="testi-name">Mr. Vinod Kumar</div>
-            <div class="testi-role">Wheelchair user and accessibility advocate</div>
+            <div class="testi-role">Wheelchair user</div>
           </div>
         </div>
       </div>
@@ -484,7 +499,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   <!-- HOME: EXPERT FEEDBACK -->
   <div class="testi-preview" id="testi">
     <div class="testi-preview-header fade-up">
-      <div class="section-tag">What people say</div>
+      <div class="section-tag">What the Experienced People Say</div>
       <h2 class="section-title">Expert feedback.</h2>
       <p class="section-sub" style="margin:0 auto;">Feedback from founders and directors who have reviewed SmartDrive Assist firsthand.</p>
     </div>
@@ -552,7 +567,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -675,7 +690,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -792,7 +807,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -824,7 +839,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <p class="section-sub" style="margin-bottom:2rem;">The project sits at the intersection of servo robotics, inclusive design, and social impact — currently in active prototype development with interest from disability-tech organisations.</p>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;">
         <a class="btn-primary" href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors site</a>
-        <a class="btn-outline" href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a>
+        <a class="btn-outline" href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a>
       </div>
     </div>
     <div class="about-cards fade-up">
@@ -901,7 +916,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -998,7 +1013,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -1031,39 +1046,31 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;">
         <div class="testi-card">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/B7kv7ZeWvPI" title="Codeavour 7.0 — 2nd in India nationals" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Codeavour 7.0 — 2nd in India nationals</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Codeavour 7.0 — 2nd in India nationals</strong></p>
         </div>
         <div class="testi-card">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/BdXLWOQJgtA" title="Meeting with Prateek Madhav" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with Prateek Madhav</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Prateek Madhav</strong></p>
         </div>
         <div class="testi-card">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/tIm-6OMf9_Y" title="Meeting with Mr. Vinod Kumar, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with Mr. Vinod Kumar, wheelchair user</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Vinod Kumar, wheelchair user</strong></p>
         </div>
         <div class="testi-card">
           <img src="../images/logo.png" alt="SmartDrive Assist primary logo artwork (PNG)" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Primary brand logo</strong><br/>File: ../images/logo.png</p>
-          <img src="../images/logo.svg" alt="SmartDrive Assist primary logo artwork (SVG)" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Primary brand logo</strong><br/>File: ../images/logo.svg</p>
-        </div>
-        <div class="testi-card">
-          <img src="../images/favicon.svg" alt="SmartDrive Assist sub icon favicon artwork (SVG)" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Sub icon (favicon)</strong><br/>File: ../images/favicon.svg</p>
-          <img src="../images/logo.svg" alt="SmartDrive Assist logo in SVG format" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">logo.svg</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Primary brand logo</strong></p>
         </div>
         <div class="testi-card">
           <img src="../images/favicon.svg" alt="SmartDrive Assist favicon in SVG format" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">favicon.svg</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Subicon</strong> (used as the website favicon and as the primary icon in all other applications.)</p>
         </div>
       </div>
     </div>
   </section>
   <button class="page-nav-banner light-prev" onclick="showPage('behind')">
     <div class="pnb-left">
-      <div class="pnb-eyebrow">Next &mdash; Behind the Build screen</div>
-      <div class="pnb-title">Go deeper.<br/><span>Behind the build.</span></div>
+      <div class="pnb-eyebrow">Next &mdash; Our Journey screen</div>
+      <div class="pnb-title">Go deeper.<br/><span>Our journey.</span></div>
       <div class="pnb-sub">Story, process, and engineering journey</div>
     </div>
     <div class="pnb-right"><div class="pnb-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
@@ -1087,7 +1094,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -1104,7 +1111,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   </div>
 </div><!-- end pg-gallery -->
 
-<!-- ════════════════ PAGE: BEHIND THE BUILD ════════════════ -->
+<!-- ════════════════ PAGE: OUR JOURNEY ════════════════ -->
 <div class="pg" id="pg-behind">
   <button class="back-btn" onclick="showPage('gallery')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -1112,9 +1119,23 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   </button>
   <section class="section" style="background:var(--white);">
     <div style="max-width:960px;margin:0 auto;" class="fade-up">
-      <div class="section-tag">Behind the Build</div>
-      <h2 class="section-title">How SmartDrive Assist is being built.</h2>
-      <p class="section-sub" style="max-width:760px;">From early problem discovery to working prototype iterations, this section captures the decisions, testing loops, and real-world feedback that continue to shape SmartDrive Assist.</p>
+      <div class="section-tag">Our Journey</div>
+      <h2 class="section-title">How SmartDrive Assist became our mission.</h2>
+      <p class="section-sub" style="max-width:760px;">We are Ivaan Singh (PYP 4), Siraaj Singh Pabby (PYP 4), and Utsa Banerjee (PYP 5) from Pathways School Gurgaon.</p>
+            <div class="journey-map" aria-label="SmartDrive Assist journey roadmap">
+      <div class="journey-map" aria-label="SmartDrive Assist journey roadmap">
+        <div class="journey-road" aria-hidden="true">
+          <svg viewBox="0 0 320 760" preserveAspectRatio="none">
+            <path d="M182 12 C 78 92, 252 170, 130 262 C 62 318, 244 422, 136 516 C 72 578, 242 664, 150 748"/>
+            <path class="road-center" d="M182 12 C 78 92, 252 170, 130 262 C 62 318, 244 422, 136 516 C 72 578, 242 664, 150 748"/>
+          </svg>
+        </div>
+        <article class="journey-step left"><div class="journey-dot">1</div><p class="journey-text">Spotted a mobility gap: we saw wheelchair users struggle and decided to help.</p></article>
+        <article class="journey-step right"><div class="journey-dot">2</div><p class="journey-text">Found our platform: Codeavour 7.0 gave us a stage to build and spread awareness.</p></article>
+        <article class="journey-step left"><div class="journey-dot">3</div><p class="journey-text">Built the solution: SmartDrive Assist.</p></article>
+        <article class="journey-step right"><div class="journey-dot">4</div><p class="journey-text">Validated with founders/CEOs and, most importantly, real wheelchair users.</p></article>
+      </div>
+    </div>
     </div>
   </section>
   <button class="page-nav-banner" onclick="showPage('contact')">
@@ -1144,7 +1165,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -1166,7 +1187,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 <div class="pg" id="pg-contact">
   <button class="back-btn" onclick="showPage('behind')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-    Back to Behind the Build
+    Back to Our Journey
   </button>
   <div class="contact-wrap">
     <div class="fade-up">
@@ -1249,7 +1270,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <ul>
         <li><button onclick="showPage('about')">Our mission</button></li>
         <li><a href="https://ivaansingh.com/techcare-warriors" target="_blank">TechCare Warriors</a></li>
-        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Behind the Build</a></li>
+        <li><a href="https://ivaansingh.com/techcare-warriors/behind-the-build/" target="_blank">Our Journey</a></li>
       </ul>
     </div>
     <div class="foot-col">
