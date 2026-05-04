@@ -164,6 +164,12 @@ h1 .hl{color:var(--accent);}
 .testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:white;flex-shrink:0;}
 .testi-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;}
 .testi-role{font-size:.77rem;color:var(--text-muted);}
+.testi-actions{margin-top:1rem;}
+.testi-link-btn{background:var(--accent-light);color:var(--accent);border:1px solid rgba(0,87,255,.2);padding:.5rem .9rem;border-radius:999px;font-size:.78rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s,transform .15s;}
+.testi-link-btn:hover{background:#d7e5ff;transform:translateY(-1px);}
+
+.meeting-focus{border-color:var(--accent)!important;animation:meetingBlink 1.2s ease-in-out 4;box-shadow:0 0 0 3px rgba(0,87,255,.22),0 12px 30px rgba(0,87,255,.16);}
+@keyframes meetingBlink{0%,100%{box-shadow:0 0 0 2px rgba(0,87,255,.18),0 8px 24px rgba(0,87,255,.1);}50%{box-shadow:0 0 0 6px rgba(0,87,255,.35),0 14px 34px rgba(0,87,255,.22);}}
 
 /* ── PAGE: FEATURES ── */
 #pg-features{}
@@ -482,6 +488,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">Wheelchair user</div>
           </div>
         </div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openGalleryMeeting('meeting-vinod-kumar')">See the meeting</button></div>
       </div>
       <div class="testi-card">
         <p class="testi-quote">Affordability is critical. A retrofit approach can open up smart mobility to people who cannot replace their existing chair.</p>
@@ -492,6 +499,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">Wheelchair user interviews</div>
           </div>
         </div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="showPage('gallery')">See the meeting</button></div>
       </div>
     </div>
   </div>
@@ -513,6 +521,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">Director, BraveHeart Soldier Foundation</div>
           </div>
         </div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openGalleryMeeting('meeting-anuj-sharma')">See the meeting</button></div>
       </div>
       <div class="testi-card">
         <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
@@ -523,6 +532,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">CEO, AssisTech Foundation</div>
           </div>
         </div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openGalleryMeeting('meeting-prateek-madhav')">See the meeting</button></div>
       </div>
     </div>
   </div>
@@ -1044,15 +1054,15 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <p class="section-sub">Key videos and assets from competitions, mentorship meetings, and user conversations.</p>
       </div>
       <div class="fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;">
-        <div class="testi-card">
+        <div class="testi-card" id="meeting-anuj-sharma">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/B7kv7ZeWvPI" title="Codeavour 7.0 — 2nd in India nationals" style="border:0;border-radius:12px;" allowfullscreen></iframe>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Codeavour 7.0 — 2nd in India nationals</strong></p>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" id="meeting-prateek-madhav">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/BdXLWOQJgtA" title="Meeting with Prateek Madhav" style="border:0;border-radius:12px;" allowfullscreen></iframe>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Prateek Madhav</strong></p>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" id="meeting-vinod-kumar">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/tIm-6OMf9_Y" title="Meeting with Mr. Vinod Kumar, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Vinod Kumar, wheelchair user</strong></p>
         </div>
@@ -1221,7 +1231,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" data-callback="enableMailDraft" data-expired-callback="disableMailDraft"></div>
         <div class="captcha-note">Complete the reCAPTCHA to enable drafting your email.</div>
       </div>
-      <button class="submit-btn" id="send-btn" onclick="sendMail()" disabled>Open draft in default mail app &rarr;</button>
+      <button class="submit-btn" id="send-btn" onclick="sendMail()" disabled>Open Draft in Mail App &rarr;</button>
     </div>
     <!-- sent state — shown after mailto fires -->
     <div id="contact-sent" style="display:none;background:var(--green-light,#e0f8f0);border:1px solid #a0e8cc;border-radius:16px;padding:2rem 1.5rem;text-align:center;">
@@ -1307,6 +1317,20 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       const el = document.getElementById('nl-' + p);
       if(el) el.style.color = (p === id) ? 'var(--text-dark)' : '';
     });
+  }
+
+
+  function openGalleryMeeting(meetingId) {
+    showPage('gallery');
+    setTimeout(() => {
+      const el = document.getElementById(meetingId);
+      if (!el) return;
+      document.querySelectorAll('#pg-gallery .meeting-focus').forEach(card => card.classList.remove('meeting-focus'));
+      el.classList.add('meeting-focus');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => el.classList.remove('meeting-focus'), 5000);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 120);
   }
 
   // handle browser back/forward
