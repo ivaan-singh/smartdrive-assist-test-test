@@ -171,6 +171,17 @@ h1 .hl{color:var(--accent);}
 .meeting-focus{border-color:var(--accent)!important;animation:meetingBlink 1.2s ease-in-out 4;box-shadow:0 0 0 3px rgba(0,87,255,.22),0 12px 30px rgba(0,87,255,.16);}
 @keyframes meetingBlink{0%,100%{box-shadow:0 0 0 2px rgba(0,87,255,.18),0 8px 24px rgba(0,87,255,.1);}50%{box-shadow:0 0 0 6px rgba(0,87,255,.35),0 14px 34px rgba(0,87,255,.22);}}
 
+.endorsement-card{cursor:zoom-in;position:relative;}
+.endorsement-hitbox{position:absolute;inset:0;border:0;background:transparent;cursor:zoom-in;border-radius:12px;z-index:2;}
+.endorsement-hitbox::after{content:"Zoom in";position:absolute;top:.7rem;right:.7rem;border:1px solid rgba(0,87,255,.35);background:rgba(255,255,255,.94);color:var(--accent);border-radius:999px;padding:.35rem .65rem;font-size:.75rem;font-weight:700;line-height:1.1;pointer-events:none;}
+.endorsement-modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:1200;padding:1.5rem;}
+.endorsement-modal.open{display:flex;}
+.endorsement-modal-content{position:relative;width:min(95vw,1080px);height:min(90vh,840px);background:#111;border-radius:14px;padding:3.2rem 1rem 1rem;}
+.endorsement-modal iframe{width:100%;height:100%;border:0;border-radius:10px;background:white;}
+.endorsement-ctrl{position:absolute;top:.7rem;right:.8rem;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;border-radius:999px;padding:.38rem .72rem;font-size:.8rem;font-weight:600;cursor:pointer;z-index:5;}
+.endorsement-ctrl:hover{background:rgba(0,87,255,.7);border-color:rgba(0,87,255,.9);}
+
+
 /* ── PAGE: FEATURES ── */
 #pg-features{}
 /* BACK BUTTON */
@@ -532,7 +543,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">CEO, AssisTech Foundation</div>
           </div>
         </div>
-        <div class="testi-actions"><button class="testi-link-btn" onclick="openGalleryMeeting('meeting-prateek-madhav')">See the meeting</button></div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openGalleryMeeting('asset-endorsement')">See the endorsement</button></div>
       </div>
     </div>
   </div>
@@ -724,11 +735,6 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   <button class="back-btn" onclick="showPage('features')">
     <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to How it works
-                                                         
-    Back to How it works
-
-    Back to Features
-
   </button>
 
   <div class="models-wrap">
@@ -1066,13 +1072,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/tIm-6OMf9_Y" title="Meeting with Mr. Vinod Kumar, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Vinod Kumar, wheelchair user</strong></p>
         </div>
-        <div class="testi-card">
-          <img src="../images/logo.png" alt="SmartDrive Assist primary logo artwork (PNG)" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Primary brand logo</strong></p>
-        </div>
-        <div class="testi-card">
-          <img src="../images/favicon.svg" alt="SmartDrive Assist favicon in SVG format" style="width:100%;height:220px;object-fit:contain;background:var(--off-white);border-radius:12px;padding:1rem;"/>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Subicon</strong> (used as the website favicon and as the primary icon in all other applications.)</p>
+        <div class="testi-card endorsement-card" id="asset-endorsement" onclick="openEndorsementModal()">
+          <iframe width="100%" height="220" src="../images/endorsement.pdf#view=FitH" title="Endorsement document (PDF)" style="border:0;border-radius:12px;background:var(--off-white);" loading="lazy"></iframe>
+          <button class="endorsement-hitbox" aria-label="Zoom in to endorsement" onclick="event.stopPropagation();openEndorsementModal()"></button>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Endorsement</strong> (PDF document)</p>
         </div>
       </div>
     </div>
@@ -1118,6 +1121,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   <div class="foot-bottom">
     <span>2025 SmartDrive Assist &middot; TechCare Warriors &middot; Gurugram, India</span>
     <span>A student innovation project</span>
+  </div>
+  <div class="endorsement-modal" id="endorsement-modal" onclick="handleEndorsementOverlayClick(event)">
+    <div class="endorsement-modal-content" onclick="event.stopPropagation()">
+      <button class="endorsement-ctrl" id="endorsement-toggle" onclick="toggleEndorsementZoom()" aria-label="Zoom out of endorsement">Zoom out</button>
+      <iframe id="endorsement-modal-frame" src="../images/endorsement.pdf#zoom=page-fit" title="Full endorsement document (PDF)"></iframe>
+    </div>
   </div>
 </div><!-- end pg-gallery -->
 
@@ -1310,6 +1319,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     window.scrollTo(0,0);
     // update hash so reload lands on same page
     try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
+    closeEndorsementModal();
     closeDrop();
     setTimeout(initFades, 50);
     // update active nav link
@@ -1332,6 +1342,48 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 120);
   }
+
+
+  function openEndorsementModal() {
+    const modal = document.getElementById('endorsement-modal');
+    if (!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setEndorsementZoomState(true);
+  }
+
+  function closeEndorsementModal() {
+    const modal = document.getElementById('endorsement-modal');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function setEndorsementZoomState(isZoomedIn) {
+    const frame = document.getElementById('endorsement-modal-frame');
+    const toggle = document.getElementById('endorsement-toggle');
+    if (!frame || !toggle) return;
+    frame.src = isZoomedIn
+      ? '../images/endorsement.pdf#view=FitH'
+      : '../images/endorsement.pdf#zoom=page-fit';
+    toggle.textContent = isZoomedIn ? 'Zoom out' : 'Zoom in';
+    toggle.setAttribute('aria-label', isZoomedIn ? 'Zoom out of endorsement' : 'Zoom in to endorsement');
+    toggle.dataset.zoomedIn = isZoomedIn ? '1' : '0';
+  }
+
+  function toggleEndorsementZoom() {
+    const toggle = document.getElementById('endorsement-toggle');
+    const isZoomedIn = toggle && toggle.dataset.zoomedIn === '1';
+    setEndorsementZoomState(!isZoomedIn);
+  }
+
+  function handleEndorsementOverlayClick(event) {
+    if (event.target.id === 'endorsement-modal') closeEndorsementModal();
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') closeEndorsementModal();
+  });
 
   // handle browser back/forward
   window.addEventListener('popstate', function() {
