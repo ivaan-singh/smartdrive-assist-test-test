@@ -59,15 +59,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .journey-road svg{width:100%;height:100%;}
 .journey-road path{stroke:var(--accent);stroke-width:18;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.18;}
 .journey-road .road-center{stroke:var(--accent-mid);stroke-width:3;stroke-dasharray:6 12;opacity:.75;}
-.journey-step{position:relative;display:flex;align-items:flex-start;gap:.9rem;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem 1rem 1rem .85rem;max-width:360px;box-shadow:0 10px 24px rgba(0,0,0,.03);}
+.journey-step{position:relative;background:var(--white);border:1px solid var(--border);border-radius:14px;max-width:360px;box-shadow:0 10px 24px rgba(0,0,0,.03);overflow:hidden;}
 .journey-step + .journey-step{margin-top:1.1rem;}
 .journey-step.left{margin-right:auto;}
 .journey-step.right{margin-left:auto;}
-.journey-dot{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.journey-text{font-size:.94rem;line-height:1.6;color:var(--text-dark);}
+.journey-head{display:flex;align-items:center;gap:.6rem;background:var(--accent-light);border-bottom:1px solid var(--border);border-radius:14px 14px 0 0;padding:.62rem .85rem;}
+.journey-num{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.journey-label{font-family:'Syne',sans-serif;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.journey-text{font-size:.94rem;line-height:1.6;color:var(--text-dark);padding:.9rem .95rem 1rem;}
 @media(max-width:760px){
   .journey-road{left:26px;transform:none;width:120px;}
-  .journey-step,.journey-step.left,.journey-step.right{max-width:100%;margin-left:0;margin-right:0;padding-left:.8rem;}
+  .journey-step,.journey-step.left,.journey-step.right{max-width:100%;margin-left:0;margin-right:0;}
   .journey-map{padding-left:.1rem;}
 }
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
@@ -743,14 +745,14 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     <div class="models-hero fade-up">
       <div class="section-tag">Models</div>
       <h2 class="section-title">Choose your SmartDrive Assist phase.</h2>
-      <p class="section-sub" style="margin:0 auto;">Start with essential controls and upgrade to advanced safety and AI capabilities as needed.</p>
+      <p class="section-sub" style="margin:0 auto;">Start with Essentials and upgrade to Secure+ safety and Intelligent AI capabilities as needed.</p>
     </div>
 
     <div class="models-grid">
       <div class="model-card fade-up">
-        <span class="feat-tag-pill t-control">Phase 1</span>
+        <span class="feat-tag-pill t-control">Essentials</span>
         <div class="feat-name">Core Control Model</div>
-        <div class="model-price">₹13,500</div>
+        <div class="model-price">₹10,000</div>
         <ul class="model-features">
           <li>Simple manual / electric mode toggle</li>
           <li>Direction control and speed control</li>
@@ -759,7 +761,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       </div>
 
       <div class="model-card fade-up">
-        <span class="feat-tag-pill t-safety">Phase 2</span>
+        <span class="feat-tag-pill t-safety">Secure+</span>
         <div class="feat-name">Safety + Connectivity Model</div>
         <div class="model-price">₹20,000</div>
         <ul class="model-features">
@@ -771,8 +773,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       </div>
 
       <div class="model-card fade-up">
-        <span class="feat-tag-pill t-emergency">Phase 3</span>
-        <div class="feat-name">AI + Emergency Model</div>
+        <span class="feat-tag-pill t-emergency">Intelligent</span>
+        <div class="feat-name">AI Model</div>
         <div class="model-price">₹40,000</div>
         <ul class="model-features">
           <li>Everything in the previous phase</li>
@@ -1138,7 +1140,6 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="section-tag">Our Journey</div>
       <h2 class="section-title">How SmartDrive Assist became our mission.</h2>
       <p class="section-sub" style="max-width:760px;">We are Ivaan Singh (PYP 4), Siraaj Singh Pabby (PYP 4), and Utsa Banerjee (PYP 5) from Pathways School Gurgaon.</p>
-            <div class="journey-map" aria-label="SmartDrive Assist journey roadmap">
       <div class="journey-map" aria-label="SmartDrive Assist journey roadmap">
         <div class="journey-road" aria-hidden="true">
           <svg viewBox="0 0 320 760" preserveAspectRatio="none">
@@ -1146,12 +1147,31 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <path class="road-center" d="M182 12 C 78 92, 252 170, 130 262 C 62 318, 244 422, 136 516 C 72 578, 242 664, 150 748"/>
           </svg>
         </div>
-        <article class="journey-step left"><div class="journey-dot">1</div><p class="journey-text">Spotted a mobility gap: we saw wheelchair users struggle and decided to help.</p></article>
-        <article class="journey-step right"><div class="journey-dot">2</div><p class="journey-text">Found our platform: Codeavour 7.0 gave us a stage to build and spread awareness.</p></article>
-        <article class="journey-step left"><div class="journey-dot">3</div><p class="journey-text">Built the solution: SmartDrive Assist.</p></article>
-        <article class="journey-step right"><div class="journey-dot">4</div><p class="journey-text">Validated with founders/CEOs and, most importantly, real wheelchair users.</p></article>
+        <article class="journey-step left">
+          <div class="journey-head"><span class="journey-num">1</span><span class="journey-label">Empathise</span></div>
+          <p class="journey-text">Spotted a mobility gap: we saw wheelchair users struggle and decided to help.</p>
+        </article>
+        <article class="journey-step right">
+          <div class="journey-head"><span class="journey-num">2</span><span class="journey-label">Define</span></div>
+          <p class="journey-text">Understood the problem: we listened, researched daily wheelchair challenges, and focused on practical support users actually need.</p>
+        </article>
+        <article class="journey-step left">
+          <div class="journey-head"><span class="journey-num">3</span><span class="journey-label">Platform</span></div>
+          <p class="journey-text">Codeavour 7.0 gave us a stage to build and spread awareness.</p>
+        </article>
+        <article class="journey-step right">
+          <div class="journey-head"><span class="journey-num">4</span><span class="journey-label">Ideate</span></div>
+          <p class="journey-text">Built the solution: SmartDrive Assist.</p>
+        </article>
+        <article class="journey-step left">
+          <div class="journey-head"><span class="journey-num">5</span><span class="journey-label">Validation &amp; Prototype</span></div>
+          <p class="journey-text">Validated with founders/CEOs and, most importantly, real wheelchair users.</p>
+        </article>
+        <article class="journey-step right">
+          <div class="journey-head"><span class="journey-num">6</span><span class="journey-label">Testing &amp; Implementation</span></div>
+          <p class="journey-text">In progress: testing the prototype, refining implementation, and preparing for wider real-world use.</p>
+        </article>
       </div>
-    </div>
     </div>
   </section>
   <button class="page-nav-banner" onclick="showPage('contact')">
