@@ -169,21 +169,17 @@ h1 .hl{color:var(--accent);}
 .testi-actions{margin-top:1rem;}
 .testi-link-btn{background:var(--accent-light);color:var(--accent);border:1px solid rgba(0,87,255,.2);padding:.5rem .9rem;border-radius:999px;font-size:.78rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s,transform .15s;}
 .testi-link-btn:hover{background:#d7e5ff;transform:translateY(-1px);}
-.home-video-flex{display:none;margin-top:1rem;border:1px solid var(--border);border-radius:14px;background:var(--off-white);padding:.85rem;gap:.9rem;align-items:center;box-shadow:0 10px 26px rgba(0,87,255,.07);}
+.home-video-flex{display:none;margin-top:1rem;border:1px solid var(--border);border-radius:14px;background:var(--off-white);padding:.85rem;box-shadow:0 10px 26px rgba(0,87,255,.07);}
 .home-video-flex.open{display:flex;}
-.home-video-frame{width:min(340px,100%);aspect-ratio:16/9;border:0;border-radius:10px;background:#111;flex:1 1 260px;}
-.home-video-meta{flex:1 1 180px;}
-.home-video-meta strong{display:block;font-family:'Syne',sans-serif;font-size:.9rem;margin-bottom:.25rem;color:var(--text-dark);}
-.home-video-meta span{font-size:.78rem;color:var(--text-muted);line-height:1.5;}
-.home-video-close{margin-top:.55rem;background:transparent;border:0;color:var(--accent);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.76rem;cursor:pointer;padding:0;}
-@media(max-width:700px){.home-video-flex{flex-direction:column;align-items:stretch;}.home-video-frame{width:100%;}}
+.home-video-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#111;display:block;}
+@media(max-width:700px){.home-video-frame{width:100%;}}
 
 .-focus{border-color:var(--accent)!important;animation:Blink 1.2s ease-in-out 4;box-shadow:0 0 0 3px rgba(0,87,255,.22),0 12px 30px rgba(0,87,255,.16);}
 @keyframes Blink{0%,100%{box-shadow:0 0 0 2px rgba(0,87,255,.18),0 8px 24px rgba(0,87,255,.1);}50%{box-shadow:0 0 0 6px rgba(0,87,255,.35),0 14px 34px rgba(0,87,255,.22);}}
 
 .endorsement-card{cursor:zoom-in;position:relative;}
 .endorsement-hitbox{position:absolute;inset:0;border:0;background:transparent;cursor:zoom-in;border-radius:12px;z-index:2;}
-.endorsement-hitbox::after{content:"Zoom in";position:absolute;top:.7rem;right:.7rem;border:1px solid rgba(0,87,255,.35);background:rgba(255,255,255,.94);color:var(--accent);border-radius:999px;padding:.35rem .65rem;font-size:.75rem;font-weight:700;line-height:1.1;pointer-events:none;}
+.endorsement-hitbox::after{content:"View";position:absolute;top:.7rem;right:.7rem;border:1px solid rgba(0,87,255,.35);background:rgba(255,255,255,.94);color:var(--accent);border-radius:999px;padding:.35rem .65rem;font-size:.75rem;font-weight:700;line-height:1.1;pointer-events:none;}
 .endorsement-modal{position:fixed;inset:0;background:rgba(0,0,0,.86);display:none;align-items:center;justify-content:center;z-index:1200;padding:0;}
 .endorsement-modal.open{display:flex;}
 .endorsement-modal-content{position:relative;width:100vw;height:100vh;background:#111;border-radius:0;padding:3.2rem 1rem 1rem;}
@@ -522,7 +518,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="testi-card">
         <p class="testi-quote">In a shelter like this, wheelchairs break down often — sometimes in a year. If your motor kit can be moved from a broken chair to a new frame, it is a very good idea. It protects our movement for the long term.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent);">MR</div>
+          <div class="testi-avatar" style="background:var(--green);">MR</div>
           <div>
             <div class="testi-name">Mrs. Rajdulari</div>
             <div class="testi-role">Wheelchair user</div>
@@ -544,7 +540,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="testi-card">
         <p class="testi-quote">Right now, I have to wait for someone to be free to push me to my therapy or even to the washroom. Having a button to move myself means I don't have to be a burden on others. Independence is what we need most.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent);">MS</div>
+          <div class="testi-avatar" style="background:var(--green);">MS</div>
           <div>
             <div class="testi-name">Mrs. Sima</div>
             <div class="testi-role">Wheelchair user</div>
@@ -572,7 +568,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">Director, BraveHeart Soldier Foundation</div>
           </div>
         </div>
-        <div class="testi-actions"><button class="testi-link-btn" onclick="toggleHomeVideo(this,'B7kv7ZeWvPI','Meeting with Mr. Anuj Sharma')">Watch the Meeting</button></div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openEndorsementModal('../images/bhf_endorsement.pdf', 'BraveHeart Soldier Foundation endorsement document')">View the Endorsement</button></div>
       </div>
       <div class="testi-card">
         <p class="testi-quote">You have a very strong point of view and a great concept. You have identified a real problem that affects millions in India.</p>
@@ -583,7 +579,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">CEO, AssisTech Foundation</div>
           </div>
         </div>
-        <div class="testi-actions"><button class="testi-link-btn" onclick="openEndorsementModal()">View the Endorsement</button></div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="toggleHomeVideo(this,'BdXLWOQJgtA','Meeting with Mr. Prateek Madhav')">Watch the Meeting</button></div>
       </div>
       <div class="testi-card">
         <p class="testi-quote">SmartDrive Assist addresses our two biggest challenges: affordability for low-income communities and reusability, ensuring a family’s investment is protected even if a wheelchair frame breaks.</p>
@@ -594,12 +590,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
             <div class="testi-role">NGO partner feedback</div>
           </div>
         </div>
-        <div class="testi-actions"><button class="testi-link-btn" onclick="toggleHomeVideo(this,'e-Jn70D2mxI','TESF Endorsement Video')">Watch the Endorsement</button></div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="openEndorsementModal('../images/tesf_endorsement.pdf', 'The Earth Saviours Foundation endorsement document')">View the Endorsement</button></div>
       </div>
       <div class="testi-card">
         <p class="testi-quote">Since this kit can be moved from an old chair to a new one, it is a great investment for an NGO. It protects the users' independence for a long time.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent);">R</div>
+          <div class="testi-avatar" style="background:var(--green);">R</div>
           <div>
             <div class="testi-name">Riya</div>
             <div class="testi-role">Caretaker, TESF</div>
@@ -1122,8 +1118,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Codeavour 7.0 — 2nd in India nationals</strong></p>
         </div>
         <div class="testi-card" id="meeting-prateek-madhav">
-          <iframe width="100%" height="220" src="https://www.youtube.com/embed/BdXLWOQJgtA" title="Meeting with Mr. Mr. Mr. Mr. Mr. Pratek Madhav" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Mr. Mr. Mr. Mr. Mr. Pratek Madhav, CEO and Co-Founder AssisTech Foundation</strong></p>
+          <iframe width="100%" height="220" src="https://www.youtube.com/embed/BdXLWOQJgtA" title="Meeting with Mr. Prateek Madhav (30 mins)" style="border:0;border-radius:12px;" allowfullscreen></iframe>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Prateek Madhav, CEO and Co-Founder AssisTech Foundation (30 mins)</strong></p>
         </div>
         <div class="testi-card" id="meeting-vinod-kumar">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/tIm-6OMf9_Y" title="Meeting with Mr. Vinod Kumar, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
@@ -1135,8 +1131,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         </div>
         <div class="testi-card endorsement-card" id="bhf-endorsement" onclick="openEndorsementModal('../images/bhf_endorsement.pdf', 'BraveHeart Soldier Foundation endorsement document')">
           <iframe width="100%" height="220" src="../images/bhf_endorsement.pdf#view=FitH" title="BraveHeart Soldier Foundation Endorsement Document (PDF)" style="border:0;border-radius:12px;background:var(--off-white);" loading="lazy"></iframe>
-          <button class="endorsement-hitbox" aria-label="Zoom in to endorsement" onclick="event.stopPropagation();openEndorsementModal('../images/bhf_endorsement.pdf', 'BraveHeart Soldier Foundation endorsement document')"></button>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Endorsement</strong> by Mr. Anuj Sharma, Director BraveHeart Foundation</p>
+          <button class="endorsement-hitbox" aria-label="View endorsement" onclick="event.stopPropagation();openEndorsementModal('../images/bhf_endorsement.pdf', 'BraveHeart Soldier Foundation endorsement document')"></button>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Endorsement</strong> by Mr. Anuj Sharma, Director, BraveHeart Soldier Foundation</p>
         </div>
         <div class="testi-card" id="meeting-sima">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/WP_IqgijXT4" title="Meeting with Mrs. Sima, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
@@ -1152,7 +1148,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         </div>
         <div class="testi-card endorsement-card" id="tesf-endorsement" onclick="openEndorsementModal('../images/tesf_endorsement.pdf', 'The Earth Saviours Foundation endorsement document')">
           <iframe width="100%" height="220" src="../images/tesf_endorsement.pdf#view=FitH" title="The Earth Saviours Foundation Endorsement Document (PDF)" style="border:0;border-radius:12px;background:var(--off-white);" loading="lazy"></iframe>
-          <button class="endorsement-hitbox" aria-label="Zoom in to endorsement" onclick="event.stopPropagation();openEndorsementModal('../images/tesf_endorsement.pdf', 'The Earth Saviours Foundation endorsement document')"></button>
+          <button class="endorsement-hitbox" aria-label="View endorsement" onclick="event.stopPropagation();openEndorsementModal('../images/tesf_endorsement.pdf', 'The Earth Saviours Foundation endorsement document')"></button>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Endorsement</strong> by The Earth Saviours Foundation (TESF)</p>
         </div>
         <div class="testi-card" id="tesf-endorsement-video">
@@ -1209,8 +1205,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   </div>
   <div class="endorsement-modal" id="endorsement-modal" onclick="handleEndorsementOverlayClick(event)">
     <div class="endorsement-modal-content" onclick="event.stopPropagation()">
-      <button class="endorsement-ctrl" id="endorsement-toggle" onclick="closeEndorsementModal()" aria-label="Close endorsement preview">Zoom out</button>
-      <iframe id="endorsement-modal-frame" src="../images/endorsement.pdf#zoom=page-fit" title="Full endorsement document (PDF)"></iframe>
+      <button class="endorsement-ctrl" id="endorsement-toggle" onclick="closeEndorsementModal()" aria-label="Close endorsement preview">Close endorsement</button>
+      <iframe id="endorsement-modal-frame" src="../images/bhf_endorsement.pdf#zoom=page-fit" title="Full endorsement document (PDF)"></iframe>
     </div>
   </div>
 </div><!-- end pg-gallery -->
@@ -1450,11 +1446,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     });
     const panel = document.createElement('div');
     panel.className = 'home-video-flex open';
-    panel.innerHTML = `<iframe class="home-video-frame" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="home-video-meta"><strong>${title}</strong><span>Playing here so you can keep the context from the home page.</span><br/><button class="home-video-close" type="button">Close video</button></div>`;
-    panel.querySelector('.home-video-close').addEventListener('click', () => {
-      panel.remove();
-      button.textContent = button.dataset.defaultLabel;
-    });
+    panel.innerHTML = `<iframe class="home-video-frame" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
     card.appendChild(panel);
     button.textContent = 'Close video';
   }
@@ -1473,10 +1465,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
   }
 
 
-  let endorsementModalSrc = '../images/endorsement.pdf';
+  let endorsementModalSrc = '../images/bhf_endorsement.pdf';
   let endorsementModalTitle = 'Full endorsement document';
 
-  function openEndorsementModal(src = '../images/endorsement.pdf', title = 'Full endorsement document') {
+  function openEndorsementModal(src = '../images/bhf_endorsement.pdf', title = 'BraveHeart Soldier Foundation endorsement document') {
     const modal = document.getElementById('endorsement-modal');
     if (!modal) return;
     endorsementModalSrc = src;
@@ -1503,7 +1495,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       ? `${endorsementModalSrc}${isZoomedIn ? '#view=FitH' : '#zoom=page-fit'}`
       : endorsementModalSrc;
     frame.title = endorsementModalTitle;
-    toggle.textContent = 'Zoom out';
+    toggle.textContent = 'Close endorsement';
     toggle.setAttribute('aria-label', 'Close document preview');
     toggle.dataset.zoomedIn = isZoomedIn ? '1' : '0';
   }
