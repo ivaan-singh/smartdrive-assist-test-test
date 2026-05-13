@@ -181,11 +181,10 @@ If you would like to contribute:
 
 ## Author
 
-Created by Ivaan Singh.
+Created by The TechCare Warriors.
 
 - GitHub: ivaan-singh
-- Website: ivaansingh.com
-
+- Live Website: smartdrive-assist.com
 ---
 
 ## License
