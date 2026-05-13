@@ -196,6 +196,10 @@ h1 .hl{color:var(--accent);}
 .endorsement-modal iframe{width:100%;height:100%;border:0;border-radius:10px;background:white;}
 .endorsement-ctrl{position:absolute;top:.7rem;right:.8rem;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;border-radius:999px;padding:.38rem .72rem;font-size:.8rem;font-weight:600;cursor:pointer;z-index:5;}
 .endorsement-ctrl:hover{background:rgba(0,87,255,.7);border-color:rgba(0,87,255,.9);}
+.gallery-youtube-placeholder{height:220px;border:1.5px dashed #b8c7ee;border-radius:12px;background:linear-gradient(135deg,#f7f9ff,#eef4ff);display:flex;align-items:center;justify-content:center;text-align:center;padding:1.25rem;color:var(--text-muted);font-size:.82rem;line-height:1.55;}
+.gallery-youtube-placeholder strong{display:block;color:var(--text-dark);font-family:'Syne',sans-serif;font-size:.92rem;margin-bottom:.3rem;}
+.gallery-youtube-placeholder .youtube-icon{width:52px;height:36px;border-radius:10px;background:#ff0033;display:inline-flex;align-items:center;justify-content:center;margin-bottom:.85rem;box-shadow:0 10px 22px rgba(255,0,51,.18);}
+.gallery-youtube-placeholder .youtube-icon::before{content:'';width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid white;margin-left:3px;}
 
 
 /* ── PAGE: FEATURES ── */
@@ -845,11 +849,13 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="model-card fade-up">
         <span class="feat-tag-pill t-control">Essentials</span>
         <div class="feat-name">Core Control Model</div>
-        <div class="model-price">₹10,000</div>
+        <div class="model-price">₹13,000</div>
         <ul class="model-features">
-          <li>Simple manual / electric mode toggle</li>
-          <li>Direction control and speed control</li>
-          <li>Brake control with emergency panic button</li>
+          <li>SmartDrive PowerShift</li>
+          <li>SmartDrive DriveFlow</li>
+          <li>SmartDrive DynaCharge</li>
+          <li>SmartDrive AxisPilot Control</li>
+          <li>SmartDrive HeatSense</li>
         </ul>
       </div>
 
@@ -858,10 +864,13 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="feat-name">Safety + Connectivity Model</div>
         <div class="model-price">₹20,000</div>
         <ul class="model-features">
-          <li>Everything in Phase 1</li>
-          <li>Edge detection for drop-off prevention</li>
-          <li>Obstacle detection with smart stopping</li>
-          <li>Bluetooth support for wireless control</li>
+          <li>All Phase 1 features</li>
+          <li>SmartDrive MapSense</li>
+          <li>SmartDrive LifeLink</li>
+          <li>SmartDrive WaveLink</li>
+          <li>SmartDrive PocketSense</li>
+          <li>SmartDrive SkyShield</li>
+          <li>SmartDrive VisionGuard</li>
         </ul>
       </div>
 
@@ -870,11 +879,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="feat-name">AI Model</div>
         <div class="model-price">₹40,000</div>
         <ul class="model-features">
-          <li>Everything in the previous phase</li>
-          <li>AI-powered assistive tools</li>
-          <li>Everything in Phase 2</li>
-          <li>AI-powered assistive features</li>
-          <li>SOS calling and real-time alert support</li>
+          <li>All Phase 1 &amp; 2 features</li>
+          <li>SmartDrive AwareAI</li>
+          <li>SmartDrive TouchPilot</li>
+          <li>SmartDrive VoiceCommand</li>
+          <li>SmartDrive NaviGuide</li>
+          <li>SmartDrive PathPilot</li>
         </ul>
       </div>
     </div>
@@ -884,7 +894,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <h3>Need the full plan?</h3>
         <p>Scroll-ready business model, implementation notes, and projected roadmap details are available in the complete document.</p>
       </div>
-      <button class="btn-outline" type="button" onclick="openEndorsementModal('../assets/business_plan.pdf', 'SmartDrive Assist business plan document')">More details</button>
+      <button class="btn-outline" type="button" onclick="openPhasePlan()">More details</button>
     </div>
   </div>
 
@@ -1208,6 +1218,61 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="testi-card" id="investment-video">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/u0Bka3FPrNs" title="Investment Video with Nitin Jain" style="border:0;border-radius:12px;" allowfullscreen></iframe>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Investment Pitch to<strong style="color:var(--text-dark);"> Nitin Jain</strong></p>
+        </div>
+        <div class="testi-card" id="overview-video">
+          <iframe width="100%" height="220" src="https://www.youtube.com/embed/MHH5BXSrUzA" title="Overview Video" style="border:0;border-radius:12px;" allowfullscreen></iframe>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Overview Video</strong></p>
+        </div>
+      </div>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Prototype Demo</strong> &mdash; YouTube video placeholder</p>
+        </div>
+        <div class="testi-card" id="youtube-placeholder-sensor-testing">
+          <div class="gallery-youtube-placeholder" role="img" aria-label="YouTube placeholder for sensor testing video">
+            <div>
+              <span class="youtube-icon" aria-hidden="true"></span>
+              <strong>YouTube placeholder</strong>
+              Overview video coming soon
+            </div>
+          </div>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Overview</strong> &mdash; YouTube video placeholder</p>
+        </div>
+        <div class="testi-card" id="youtube-placeholder-user-trial">
+          <div class="gallery-youtube-placeholder" role="img" aria-label="YouTube placeholder for user trial video">
+            <div>
+              <span class="youtube-icon" aria-hidden="true"></span>
+              <strong>YouTube placeholder</strong>
+              Ready video coming soon
+            </div>
+          </div>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Ready</strong> &mdash; YouTube video placeholder</p>
+        </div>
+        <div class="testi-card" id="youtube-placeholder-build-update">
+          <div class="gallery-youtube-placeholder" role="img" aria-label="YouTube placeholder for build update video">
+            <div>
+              <span class="youtube-icon" aria-hidden="true"></span>
+              <strong>YouTube placeholder</strong>
+              Avishkaar video coming soon
+            </div>
+          </div>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Avishkaar</strong> &mdash; YouTube video placeholder</p>
+        </div>
+        <div class="testi-card" id="image-placeholder-1">
+          <a href="../assets/coding.jpg" aria-label="Coding">
+            <img src="../assets/coding.jpg" alt="Coding" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
+          </a>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Coding</strong></p>
+        </div>
+        <div class="testi-card" id="image-placeholder-2">
+          <a href="../assets/YOUR_FILE" aria-label="Open image placeholder 2 asset">
+            <img src="../assets/YOUR_FILE" alt="Gallery image placeholder 2" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
+          </a>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Image Placeholder 2</strong></p>
+        </div>
+        <div class="testi-card" id="image-placeholder-3">
+          <a href="../assets/YOUR_FILE" aria-label="Open image placeholder 3 asset">
+            <img src="../assets/YOUR_FILE" alt="Gallery image placeholder 3" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
+          </a>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Image Placeholder 3</strong></p>
         </div>
       </div>
     </div>
@@ -1545,9 +1610,15 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       ? `${endorsementModalSrc}${isZoomedIn ? '#view=FitH' : '#zoom=page-fit'}`
       : endorsementModalSrc;
     frame.title = endorsementModalTitle;
-    const isInvestmentDocument = endorsementModalTitle.toLowerCase().includes('investment');
-    toggle.textContent = isInvestmentDocument ? 'Close Investment Letter' : 'Close endorsement';
-    toggle.setAttribute('aria-label', isInvestmentDocument ? 'Close investment letter preview' : 'Close document preview');
+    const normalizedTitle = endorsementModalTitle.toLowerCase();
+    const isInvestmentDocument = normalizedTitle.includes('investment');
+    const isPhasePlan = normalizedTitle.includes('phase plan');
+    toggle.textContent = isPhasePlan
+      ? 'Close Phase Plan'
+      : (isInvestmentDocument ? 'Close Investment Letter' : 'Close endorsement');
+    toggle.setAttribute('aria-label', isPhasePlan
+      ? 'Close Phase Plan preview'
+      : (isInvestmentDocument ? 'Close investment letter preview' : 'Close document preview'));
     toggle.dataset.zoomedIn = isZoomedIn ? '1' : '0';
   }
 
@@ -1575,6 +1646,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     const hash = window.location.hash.replace('#','');
     showPage(VALID_PAGES.includes(hash) ? hash : 'home');
   })();
+
+  function openPhasePlan() {
+    const planUrl = new URL('../assets/phase_plan.xlsx', window.location.href).href;
+    const viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(planUrl);
+    openEndorsementModal(viewerUrl, 'SmartDrive Assist phase plan spreadsheet');
+  }
 
   function scrollTo(id) {
     setTimeout(() => {
