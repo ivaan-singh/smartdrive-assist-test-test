@@ -134,8 +134,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:80
 h1 .hl{color:var(--accent);}
 .hero-sub{font-size:1.07rem;color:var(--text-muted);font-weight:300;line-height:1.72;max-width:440px;margin-bottom:2rem;}
 .btn-group{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
-.hero-link{color:var(--text-dark);font-size:.95rem;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:gap .2s;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;}
+.hero-link{color:var(--text-dark);font-size:.95rem;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:gap .2s,color .2s;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;}
 .hero-link:hover{gap:.65rem;}
+.hero-link-muted{color:var(--text-muted);font-weight:400;}
+.hero-link-muted:hover{color:var(--text-dark);}
 .hero-trust{display:flex;align-items:center;gap:.6rem;margin-top:1.8rem;font-size:.78rem;color:var(--text-muted);flex-wrap:wrap;}
 .trust-dot{width:3px;height:3px;border-radius:50%;background:var(--border);flex-shrink:0;}
 .hero-visual{position:relative;z-index:1;display:flex;justify-content:center;}
@@ -405,7 +407,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <p class="hero-sub">SmartDrive Assist is a bolt-on intelligent system that upgrades any manual wheelchair into a full-featured smart mobility aid — no replacement needed, at a target price of just Rs. 10,000.</p>
       <div class="btn-group">
         <button class="btn-primary" onclick="showPage('behind')">Explore Our Journey</button>
-        <button class="hero-link" onclick="showPage('features')">How it works &rarr;</button>
+        <button class="hero-link hero-link-muted" onclick="showPage('features')">How it works &rarr;</button>
       </div>
       <div class="hero-trust">
         <a class="hero-link" href="#investment-commitment" style="font-size:.78rem;">SmartDrive Assist is now officially funded by Nitin Jain (Angel Investor & Serial Entrepreneur)</a>
@@ -490,19 +492,13 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           </div>
           <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Auto-Recharging</div><div style="font-size:.78rem;color:var(--text-muted);">Charges itself while being pushed.</div></div>
         </div>
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:flex-start;gap:.9rem;">
-          <div style="width:36px;height:36px;border-radius:9px;background:#f0edff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#5b3fd8" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l4-4M17 3l-4 4M10 10l4-4M6 14l4-4"/></svg>
-          </div>
-          <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:3px;">Edge Detection</div><div style="font-size:.78rem;color:var(--text-muted);">Ultrasonic sensors catch drop-offs.</div></div>
-        </div>
         <div style="background:var(--accent);border-radius:14px;padding:1.25rem 1.4rem;display:flex;align-items:center;justify-content:center;cursor:pointer;gap:.5rem;" onclick="showPage('features')">
-          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:white;">+ 4 more &rarr;</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:white;">+ more &rarr;</span>
         </div>
       </div>
     </div>
   </div>
-
+  
   <!-- HOME: USER FEEDBACK -->
   <div class="testi-preview" id="testi-user" style="background:var(--white);">
     <div class="testi-preview-header fade-up">
