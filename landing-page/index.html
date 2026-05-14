@@ -19,7 +19,9 @@ html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
 /* LOGO */
 .nav-logo-wrap{display:flex;align-items:center;gap:.65rem;cursor:pointer;text-decoration:none;background:none;border:none;padding:0;}
-.nav-logo-icon{width:34px;height:34px;flex-shrink:0;}
+.nav-logo-box{width:42px;height:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(107,114,128,.14);border:1px solid rgba(107,114,128,.22);border-radius:13px;box-shadow:0 8px 24px rgba(15,17,23,.06);backdrop-filter:blur(10px);}
+.nav-logo-icon{width:31px;height:31px;object-fit:contain;display:block;}
+.nav-logo-icon{width:34px;height:34px;flex-shrink:0;object-fit:contain;display:block;}
 .nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--text-dark);}
 .nav-logo-text span{color:var(--accent);}
 
@@ -287,6 +289,9 @@ h1 .hl{color:var(--accent);}
 .about-card.wide{grid-column:1/-1;}
 .about-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.91rem;margin-bottom:.3rem;}
 .about-card p{font-size:.81rem;color:var(--text-muted);line-height:1.6;}
+.about-sdg-list{margin:.35rem 0 0 1.05rem;color:var(--text-muted);font-size:.81rem;line-height:1.6;}
+.about-sdg-list li{padding-left:.15rem;margin:.18rem 0;}
+.about-sdg-list li::marker{color:var(--accent);font-weight:700;}
 .about-label{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-bottom:.65rem;}
 .lbl-hardware{background:#f0edff;color:#5b3fd8;}
 .lbl-design{background:#e6eeff;color:#0057FF;}
@@ -298,6 +303,9 @@ h1 .hl{color:var(--accent);}
 .mission-strip{background:var(--text-dark);padding:70px 5%;text-align:center;}
 .mission-strip blockquote{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,2.8vw,2rem);font-weight:700;color:white;max-width:760px;margin:0 auto;line-height:1.4;letter-spacing:-.01em;}
 .mission-strip blockquote span{color:var(--accent-mid);}
+.journey-thanks{font-family:'Syne',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:var(--text-muted);max-width:900px;margin:2.25rem auto .35rem;line-height:1.25;letter-spacing:-.025em;text-align:center;}
+.journey-thanks{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,2.8vw,2rem);font-weight:700;color:var(--text-dark);max-width:760px;margin:1.5rem auto 0;line-height:1.4;letter-spacing:-.01em;text-align:center;}
+.journey-thanks span{color:var(--accent-mid);}
 
 /* faq on about page */
 .faq-band{background:var(--off-white);padding:80px 5%;}
@@ -370,18 +378,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 <!-- NAV -->
 <nav>
   <a class="nav-logo-wrap" onclick="showPage('home')">
-    <svg class="nav-logo-icon" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-      <rect width="34" height="34" rx="8" fill="#0057FF"/>
-      <circle cx="13.5" cy="21" r="8.5" fill="none" stroke="white" stroke-width="2"/>
-      <line x1="13.5" y1="12.5" x2="13.5" y2="29.5" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-      <line x1="5" y1="21" x2="22" y2="21" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-      <circle cx="13.5" cy="21" r="2" fill="#0057FF" stroke="white" stroke-width="1.2"/>
-      <polygon points="14.5,13.5 11.5,19.5 14,19.5 11,26 17,20 14,20" fill="white"/>
-      <circle cx="24" cy="24" r="3.5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-      <path d="M23 9.5 A3.5 3.5 0 0 1 28 9.5" fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>
-      <path d="M21 7 A6.5 6.5 0 0 1 30 7" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-      <circle cx="25.5" cy="11.5" r="1.4" fill="white" opacity="0.9"/>
-    </svg>
+    <span class="nav-logo-box" aria-hidden="true"><img class="nav-logo-icon" src="../assets/logo.svg" alt=""/></span>
     <span class="nav-logo-text">SmartDrive <span>Assist.</span></span>
   </a>
   <ul class="nav-links">
@@ -416,20 +413,17 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     </div>
     <div class="hero-visual fade-up">
       <div class="hero-card">
-        <!-- Full logo displayed prominently -->
-        <div style="margin-bottom:1.25rem;">
-          <img src="../assets/logo.png" alt="SmartDrive Assist logo" style="width:100%;max-width:320px;display:block;margin:0 auto;border-radius:14px;"/>
-        </div>
+        <iframe width="100%" height="220" src="https://www.youtube.com/embed/MHH5BXSrUzA" title="Overview Video" style="border:0;border-radius:12px;" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
   <!-- STATS BAR -->
   <div id="stats-bar">
-    <div class="stats-item"><div class="num">75<span>M+</span></div><div class="desc">wheelchair users globally</div></div>
-    <div class="stats-item"><div class="num">9</div><div class="desc">smart modules, one add-on</div></div>
-    <div class="stats-item"><div class="num">Rs.<span>10K</span></div><div class="desc">target retail price</div></div>
-    <div class="stats-item"><div class="num">0</div><div class="desc">chair replacements needed</div></div>
+    <div class="stats-item"><div class="num">75<span>M+</span></div><div class="desc">Wheelchair Users Globally</div></div>
+    <div class="stats-item"><div class="num">3</div><div class="desc">Smart Phases, Fully Customizable</div></div>
+    <div class="stats-item"><div class="num">Rs.<span>10K</span></div><div class="desc">Target Retail Price</div></div>
+    <div class="stats-item"><div class="num">0</div><div class="desc">Chair Replacements Needed</div></div>
   </div>
 
   <!-- HOME: WHY WE BUILT IT + FEATURES TEASER -->
@@ -443,19 +437,19 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.9rem;">
         <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
           <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">Rs. 10K</div>
-          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">target price</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">Target Retail Price</div>
         </div>
         <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
           <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">75M+</div>
-          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">wheelchair users globally</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">Wheelchair Users Globally</div>
         </div>
         <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
           <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">0</div>
-          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">modifications to your chair</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">Chair Replacements</div>
         </div>
         <div style="background:var(--off-white);border-radius:14px;padding:1.25rem;">
-          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">9</div>
-          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">smart modules built-in</div>
+          <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;">3</div>
+          <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px;">Smart Phases, Fully Customizable</div>
         </div>
       </div>
     </div>
@@ -533,7 +527,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="testi-author">
           <div class="testi-avatar" style="background:var(--green);">MR</div>
           <div>
-            <div class="testi-name">Mrs. Rajdulari</div>
+            <div class="testi-name">Ms. Rajdulari</div>
             <div class="testi-role">Wheelchair user</div>
           </div>
         </div>
@@ -555,11 +549,11 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         <div class="testi-author">
           <div class="testi-avatar" style="background:var(--green);">MS</div>
           <div>
-            <div class="testi-name">Mrs. Sima</div>
+            <div class="testi-name">Ms. Sima</div>
             <div class="testi-role">Wheelchair user</div>
           </div>
         </div>
-        <div class="testi-actions"><button class="testi-link-btn" onclick="toggleHomeVideo(this,'WP_IqgijXT4','Meeting with Mrs. Sima')">Watch the Meeting</button></div>
+        <div class="testi-actions"><button class="testi-link-btn" onclick="toggleHomeVideo(this,'WP_IqgijXT4','Meeting with Ms. Sima')">Watch the Meeting</button></div>
       </div>
     </div>
   </div>
@@ -985,7 +979,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       <div class="about-card">
         <div class="about-label lbl-impact">Impact</div>
         <h4>SDG Aligned</h4>
-        <p>Directly supports UN SDG 3 — Good Health and SDG 10 — Reduced Inequalities.</p>
+        <p>Directly supports</p>
+        <ul class="about-sdg-list">
+          <li>UN SDG 3 - Good Health and Well-Being</li>
+          <li>UN SDG 9 - Industry, Innovation and Infrastructure</li>
+          <li>UN SDG 10 - Reduced Inequalities</li>
+        </ul>
       </div>
       <div class="about-card">
         <div class="about-label lbl-team">Team</div>
@@ -1002,7 +1001,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 
   <!-- MISSION STRIP -->
   <div class="mission-strip">
-    <blockquote>"Making smart mobility <span>accessible to everyone</span> — not just those who can afford a replacement chair."</blockquote>
+    <blockquote>"Making smart mobility <span>accessible to everyone</span> - not just those who can afford it"</blockquote>
   </div>
 
   <!-- PAGE NAV: Overview → Models -->
@@ -1177,8 +1176,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mr. Vinod Kumar, wheelchair user</strong></p>
         </div>
         <div class="testi-card" id="meeting-riya">
-          <iframe width="100%" height="220" src="https://www.youtube.com/embed/L0xIOWwfByY" title="Meeting with Mrs. Riya, Caretaker TESF" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mrs. Riya, Caretaker TESF</strong></p>
+          <iframe width="100%" height="220" src="https://www.youtube.com/embed/L0xIOWwfByY" title="Meeting with Ms. Riya, Caretaker TESF" style="border:0;border-radius:12px;" allowfullscreen></iframe>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Ms. Riya, Caretaker TESF</strong></p>
         </div>
         <div class="testi-card endorsement-card" id="bhf-endorsement" onclick="openEndorsementModal('../assets/bhf_endorsement.pdf', 'BraveHeart Soldier Foundation endorsement document')">
           <iframe width="100%" height="220" src="../assets/bhf_endorsement.pdf#view=FitH" title="BraveHeart Soldier Foundation Endorsement Document (PDF)" style="border:0;border-radius:12px;background:var(--off-white);" loading="lazy"></iframe>
@@ -1191,12 +1190,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Investment letter from<strong style="color:var(--text-dark);"> Nitin Jain, Angel Investor & Serial Entrepreneur</strong></p>
         </div>
         <div class="testi-card" id="meeting-sima">
-          <iframe width="100%" height="220" src="https://www.youtube.com/embed/WP_IqgijXT4" title="Meeting with Mrs. Sima, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mrs. Sima, wheelchair user</strong></p>
+          <iframe width="100%" height="220" src="https://www.youtube.com/embed/WP_IqgijXT4" title="Meeting with Ms. Sima, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Ms. Sima, wheelchair user</strong></p>
         </div>
         <div class="testi-card" id="meeting-rajdulari">
-          <iframe width="100%" height="220" src="https://www.youtube.com/embed/JbZDbayA-_A" title="Meeting with Mrs. Rajdulari, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Mrs. Rajdulari, wheelchair user</strong></p>
+          <iframe width="100%" height="220" src="https://www.youtube.com/embed/JbZDbayA-_A" title="Meeting with Ms. Rajdulari, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);">Meeting with <strong style="color:var(--text-dark);">Ms. Rajdulari, wheelchair user</strong></p>
         </div>
         <div class="testi-card" id="meeting-tesf-resident">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/9vYQ5XE1tpQ" title="Meeting with TESF resident, wheelchair user" style="border:0;border-radius:12px;" allowfullscreen></iframe>
@@ -1221,10 +1220,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
         </div>
         <div class="testi-card" id="overview-video">
           <iframe width="100%" height="220" src="https://www.youtube.com/embed/MHH5BXSrUzA" title="Overview Video" style="border:0;border-radius:12px;" allowfullscreen></iframe>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Overview Video</strong></p>
-        </div>
-      </div>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Prototype Demo</strong> &mdash; YouTube video placeholder</p>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Overview</strong> Video</p>
         </div>
         <div class="testi-card" id="youtube-placeholder-sensor-testing">
           <div class="gallery-youtube-placeholder" role="img" aria-label="YouTube placeholder for sensor testing video">
@@ -1256,23 +1252,17 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
           </div>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Avishkaar</strong> &mdash; YouTube video placeholder</p>
         </div>
-        <div class="testi-card" id="image-placeholder-1">
-          <a href="../assets/coding.jpg" aria-label="Coding">
-            <img src="../assets/coding.jpg" alt="Coding" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
-          </a>
+        <div class="testi-card" id="testing-image">
+          <img src="../assets/testing.jpg" alt="Testing Image" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Testing</strong></p>
+        </div>
+        <div class="testi-card" id="coding-image">
+          <img src="../assets/coding.jpg" alt="Coding Image" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
           <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Coding</strong></p>
         </div>
-        <div class="testi-card" id="image-placeholder-2">
-          <a href="../assets/YOUR_FILE" aria-label="Open image placeholder 2 asset">
-            <img src="../assets/YOUR_FILE" alt="Gallery image placeholder 2" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
-          </a>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Image Placeholder 2</strong></p>
-        </div>
-        <div class="testi-card" id="image-placeholder-3">
-          <a href="../assets/YOUR_FILE" aria-label="Open image placeholder 3 asset">
-            <img src="../assets/YOUR_FILE" alt="Gallery image placeholder 3" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
-          </a>
-          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Image Placeholder 3</strong></p>
+        <div class="testi-card" id="understanding-image">
+          <img src="../assets/understanding.jpg" alt="Understanding Image" style="width:100%;height:220px;display:block;object-fit:cover;border:0;border-radius:12px;background:var(--off-white);"/>
+          <p style="margin-top:.7rem;font-size:.84rem;color:var(--text-muted);"><strong style="color:var(--text-dark);">Understanding</strong></p>
         </div>
       </div>
     </div>
@@ -1371,6 +1361,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
       </div>
     </div>
   </section>
+  <div class="journey-thanks">A big thanks to our <span>parents and mentors</span></div>
   <button class="page-nav-banner" onclick="showPage('gallery')">
     <div class="pnb-left">
       <div class="pnb-eyebrow">Next &mdash; Gallery screen</div>
@@ -1522,13 +1513,19 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
 <script>
   const VALID_PAGES = ['home','about','models','features','behind','gallery','faq','contact'];
 
+  function scrollToPageTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
   // PAGE ROUTER
   function showPage(id) {
     if (!VALID_PAGES.includes(id)) id = 'home';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
     const pageEl = document.getElementById('pg-' + id) || document.getElementById('pg-home');
     pageEl.classList.add('active');
-    window.scrollTo(0,0);
+    scrollToPageTop();
     // update hash so reload lands on same page
     try { history.pushState(null, '', '#' + id); } catch(e) { window.location.hash = id; }
     closeEndorsementModal();
@@ -1637,7 +1634,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.4);padding:3rem 5%;di
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
     const pageEl = document.getElementById('pg-' + id) || document.getElementById('pg-home');
     pageEl.classList.add('active');
-    window.scrollTo(0,0);
+    scrollToPageTop();
     setTimeout(initFades, 50);
   });
 
